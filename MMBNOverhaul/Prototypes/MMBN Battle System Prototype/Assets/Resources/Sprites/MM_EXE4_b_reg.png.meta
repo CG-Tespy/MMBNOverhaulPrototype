@@ -1,0 +1,420 @@
+fileFormatVersion: 2
+guid: b2cfa897b4513354bb8bab91e7a47f44
+timeCreated: 1512884656
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: MM_EXE4__STAND
+    21300002: MM_EXE4_MOVE1
+    21300004: MM_EXE4_MOVE2
+    21300006: MM_EXE4_MOVE3
+    21300008: MM_EXE4_ATK1
+    21300010: MM_EXE4_ATK2
+    21300012: MM_EXE4_ATK3
+    21300014: MM_EXE4_ATK4
+    21300016: MM_EXE4_ATK5
+    21300018: MM_EXE4__STAND2
+    21300020: MM_EXE4__STAND3
+    21300022: MM_EXE4_HURT1
+    21300024: MM_EXE4_HURT2
+    21300026: MM_EXE4_HURT3
+    21300028: MM_EXE4_HURT4
+    21300030: MM_Slash2
+    21300032: MM_Slash3
+    21300034: MM_Slash4
+    21300036: MM_Slash5
+    21300038: MM_EXE4_b_reg_4
+    21300040: MM_Throw1
+    21300042: MM_Throw2
+    21300044: MM_Throw3
+    21300046: MM_Throw4
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 50
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 1024
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MM_EXE4__STAND
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 260
+        width: 34
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_EXE4_MOVE1
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 260
+        width: 34
+        height: 46
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_EXE4_MOVE2
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 260
+        width: 34
+        height: 48
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_EXE4_MOVE3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 260
+        width: 35
+        height: 48
+      alignment: 9
+      pivot: {x: 0.475, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_EXE4_ATK1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 207
+        width: 49
+        height: 44
+      alignment: 9
+      pivot: {x: 0.4, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_EXE4_ATK2
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 207
+        width: 49
+        height: 44
+      alignment: 9
+      pivot: {x: 0.4, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_EXE4_ATK3
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 208
+        width: 72
+        height: 44
+      alignment: 9
+      pivot: {x: 0.26, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_EXE4_ATK4
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 212
+        width: 72
+        height: 44
+      alignment: 9
+      pivot: {x: 0.26, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_EXE4_ATK5
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 212
+        width: 72
+        height: 44
+      alignment: 9
+      pivot: {x: 0.26, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_EXE4__STAND2
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 261
+        width: 34
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_EXE4__STAND3
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 260
+        width: 34
+        height: 44
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_EXE4_HURT1
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 11
+        width: 33
+        height: 50
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_EXE4_HURT2
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 11
+        width: 25
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_EXE4_HURT3
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 11
+        width: 27
+        height: 47
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_EXE4_HURT4
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 12
+        width: 34
+        height: 39
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_Slash2
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 148
+        width: 69
+        height: 45
+      alignment: 9
+      pivot: {x: 0.38, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_Slash3
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 147
+        width: 73
+        height: 45
+      alignment: 9
+      pivot: {x: 0.41, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_Slash4
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 145
+        width: 71
+        height: 55
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_Slash5
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 144
+        width: 49
+        height: 56
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_EXE4_b_reg_4
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 144
+        width: 47
+        height: 59
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_Throw1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 76
+        width: 42
+        height: 52
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_Throw2
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 76
+        width: 43
+        height: 53
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_Throw3
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 76
+        width: 40
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MM_Throw4
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 76
+        width: 48
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
