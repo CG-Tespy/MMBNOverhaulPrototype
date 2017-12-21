@@ -8,14 +8,16 @@ using UnityEngine.Events;
 public abstract class PanelEffect
 {
 	protected GameController gameController;
-	protected PanelController controller;
+	protected PanelDatabase panelDatabase;
+	protected PanelController panel;
 
 	public virtual bool isActive { get; set; }
 
-	public virtual void Init(PanelController controller)
+	public virtual void Init(PanelController panel)
 	{
-		this.controller = controller;
+		this.panel = panel;
 		gameController = GameController.instance;
+		panelDatabase = PanelDatabase.instance;
 	}
 
 	public virtual void Execute()

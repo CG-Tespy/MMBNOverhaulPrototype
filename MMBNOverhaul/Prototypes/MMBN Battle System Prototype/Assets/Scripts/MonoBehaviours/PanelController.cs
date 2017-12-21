@@ -74,7 +74,7 @@ public class PanelController : ObservableMonoBehaviour, IBattlefieldPanel, IPaus
 
 	public Combatant owner { get { return _owner; } }
 	
-	Renderer centerRenderer;
+	public Renderer centerRenderer { get; protected set; }
 	// the frame is what this script should be attached to, the center is the 
 	// child of the frame where the material is applied
 
@@ -178,13 +178,16 @@ public class PanelController : ObservableMonoBehaviour, IBattlefieldPanel, IPaus
 
 	void ApplyPanelData()
 	{
-		if (panelInfo.name.Contains("Poi"))
-		{
-			Debug.Log("Initializing poison panel.");
-		}
 		panelInfo.Init(this);
+
+		if (panelInfo.name.Contains("Cra"))
+			Debug.Log("Applying cracked panel data.");
+			
 		if (panelInfo.material != null)
 			centerRenderer.material = panelInfo.material;
+
+		centerRenderer.material.mainTexture = panelInfo.texture;
+			
 	}
 
 	#endregion

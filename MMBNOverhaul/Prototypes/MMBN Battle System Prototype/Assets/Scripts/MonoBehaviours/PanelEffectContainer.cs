@@ -11,4 +11,6 @@ using UnityEngine.Events;
 public abstract class PanelEffectContainer : MonoBehaviour
 {
 	public virtual PanelEffect effect { get; }
+
+	protected virtual void Awake() {}
 }

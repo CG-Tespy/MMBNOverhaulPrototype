@@ -14,11 +14,9 @@ public class PoisonPanel : PanelEffectContainer
 		get { return eff; }
 	}
 
-	public PoisonPanel()
+	protected override void Awake()
 	{
-		if (eff == null)
-			eff = new PoisonPanelEffect();
-			
+
 	}
 	
 }

@@ -12,7 +12,7 @@ public class CrackedPanelEffect : PanelEffect
 	public override void Execute()
 	{
 		// check if there is anything above this panel
-		Ray above = new Ray(controller.transform.position, controller.transform.up);
+		Ray above = new Ray(panel.transform.position, panel.transform.up);
 		RaycastHit[] hits = Physics.RaycastAll(above, 5);
 
 		LivingEntityController livingThing = null;
@@ -34,7 +34,7 @@ public class CrackedPanelEffect : PanelEffect
 		{
 			// apparently something stepped off of this panel, so it's time to break it
 			PanelInfo brokenPanel = PanelDatabase.instance.GetPanel("Broken Panel");
-			controller.ChangeTo(brokenPanel);
+			panel.ChangeTo(brokenPanel);
 		}
 	}
 	

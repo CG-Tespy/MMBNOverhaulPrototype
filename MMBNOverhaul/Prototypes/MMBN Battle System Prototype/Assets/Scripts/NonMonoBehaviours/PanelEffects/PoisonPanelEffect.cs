@@ -17,7 +17,7 @@ public class PoisonPanelEffect : PanelEffect
 		//Debug.Log("Executing poison panel effect!");
 
 		// check if there's anything standing on the current panel
-		Ray upwards = new Ray(controller.transform.position, controller.transform.up);
+		Ray upwards = new Ray(panel.transform.position, panel.transform.up);
 		RaycastHit[] hits = Physics.RaycastAll(upwards, 5f);
 
 		LivingEntityController livingThing;

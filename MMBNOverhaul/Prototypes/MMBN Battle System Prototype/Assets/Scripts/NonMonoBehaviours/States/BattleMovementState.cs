@@ -6,8 +6,8 @@ using UnityEngine.Events;
 
 public abstract class BattleMovementState : State
 {
-	protected const float baseMoveDelay = 0.5f;
-	protected float moveDelay = 0.5f;
+	protected const float baseMoveDelay = 0.25f;
+	protected float moveDelay = 0.25f;
 
 	protected float moveDistance = 1f;
 	protected LivingEntityController mover;

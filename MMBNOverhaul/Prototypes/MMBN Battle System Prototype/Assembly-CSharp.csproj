@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\MonoBehaviours\ControlsHandler.cs" />
+     <Compile Include="Assets\Scripts\MonoBehaviours\Effect Containers\BrokenPanel.cs" />
+     <Compile Include="Assets\Scripts\MonoBehaviours\Effect Containers\CrackedPanel.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\Effect Containers\PoisonPanel.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\HealthbarController.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\LivingEntityController.cs" />
@@ -66,6 +68,7 @@
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Interfaces\IModule.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Interfaces\IPausable.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\ObjectCopier.cs" />
+     <Compile Include="Assets\Scripts\NonMonoBehaviours\PanelEffects\BrokenPanelEffect.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\PanelEffects\CrackedPanelEffect.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\PanelEffects\PoisonPanelEffect.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Stat.cs" />

@@ -18,6 +18,7 @@ public class PanelInfo : IBattlefieldPanel, System.IEquatable<PanelInfo>
 	[SerializeField] PanelType _type = PanelType.normal;
 	[SerializeField] bool _traversable = true;
 	[SerializeField] Material _material = null;
+	[SerializeField] Texture _texture = null;
 	[SerializeField] PanelEffectContainer effectContainer = null;	
 	PanelEffect _effect = null;
 
@@ -51,6 +52,12 @@ public class PanelInfo : IBattlefieldPanel, System.IEquatable<PanelInfo>
 		get { return _material; }
 		set { _material = value; }
 	}
+
+	public Texture texture
+	{
+		get { return _texture; }
+		set { _texture = value; }
+	}
 	public PanelType type
 	{
 		get { return _type; }
@@ -75,12 +82,6 @@ public class PanelInfo : IBattlefieldPanel, System.IEquatable<PanelInfo>
 	#region Methods
 
 	#region Initialization
-	public PanelInfo()
-	{
-		
-	}
-
-
 
 	public void Init(PanelController rep)
 	{
@@ -106,6 +107,7 @@ public class PanelInfo : IBattlefieldPanel, System.IEquatable<PanelInfo>
 		copy._id = 					this._id;
 		copy.description = 			string.Copy(this.description);
 		copy.material = 			this.material;
+		copy.texture = 				this.texture;
 		copy.traversable = 			this.traversable;
 		copy.type = 				this.type;
 		
@@ -122,7 +124,6 @@ public class PanelInfo : IBattlefieldPanel, System.IEquatable<PanelInfo>
 		return copy;
 	}
 
-
 	void RegisterEffect()
 	{
 		if (effectContainer != null)
@@ -132,10 +133,8 @@ public class PanelInfo : IBattlefieldPanel, System.IEquatable<PanelInfo>
 
 			// we won't need this prefab taking up space anymore
 			MonoBehaviour.Destroy(effectContainer.gameObject);
-			//Debug.Log("This panel registered the effect " + effect.ToString());
 		}
 
-		
 	}
 
 	#endregion
