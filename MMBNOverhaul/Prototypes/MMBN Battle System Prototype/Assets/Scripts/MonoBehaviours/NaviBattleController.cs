@@ -26,8 +26,13 @@ public class NaviBattleController : LivingEntityController, IPausable
 
 	#endregion
 
+	#region Fields
 	NaviBattleStates states;
 	[SerializeField] NaviInfo _naviInfo;
+
+	#endregion
+
+	#region Properties
 
 	override public LivingEntityInfo entityInfo 
 	{
@@ -36,6 +41,8 @@ public class NaviBattleController : LivingEntityController, IPausable
 
 	public bool isPaused { get; protected set; }
 	BattlefieldManager battleField { get { return BattlefieldManager.instance; } }
+
+	#endregion
 	protected override void Awake()
 	{
 		base.Awake();
@@ -61,7 +68,7 @@ public class NaviBattleController : LivingEntityController, IPausable
 		base.Update();
 	}
 
-	void FixedUpdate()
+	protected virtual void FixedUpdate()
 	{
 		if (!isPaused)
 		{

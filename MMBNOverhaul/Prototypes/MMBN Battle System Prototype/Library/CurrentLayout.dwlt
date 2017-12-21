@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 392}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -43,7 +43,7 @@ MonoBehaviour:
     y: 0
     width: 1366
     height: 685
-  m_MinSize: {x: 950, y: 542}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -106,8 +106,8 @@ MonoBehaviour:
     y: 30
     width: 1366
     height: 635
-  m_MinSize: {x: 683, y: 492}
-  m_MaxSize: {x: 14004, y: 14042}
+  m_MinSize: {x: 681, y: 342}
+  m_MaxSize: {x: 12006, y: 8042}
   vertical: 0
   controlID: 11
 --- !u!114 &6
@@ -130,8 +130,8 @@ MonoBehaviour:
     y: 0
     width: 1024
     height: 635
-  m_MinSize: {x: 406, y: 492}
-  m_MaxSize: {x: 10002, y: 14042}
+  m_MinSize: {x: 404, y: 342}
+  m_MaxSize: {x: 8004, y: 8042}
   vertical: 1
   controlID: 12
 --- !u!114 &7
@@ -154,8 +154,8 @@ MonoBehaviour:
     y: 0
     width: 1024
     height: 364
-  m_MinSize: {x: 406, y: 221}
-  m_MaxSize: {x: 8006, y: 4021}
+  m_MinSize: {x: 404, y: 221}
+  m_MaxSize: {x: 8004, y: 4021}
   vertical: 0
   controlID: 13
 --- !u!114 &8
@@ -176,8 +176,8 @@ MonoBehaviour:
     y: 0
     width: 232
     height: 364
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -228,15 +228,15 @@ MonoBehaviour:
     y: 364
     width: 1024
     height: 271
-  m_MinSize: {x: 232, y: 271}
-  m_MaxSize: {x: 10002, y: 10021}
-  m_ActualView: {fileID: 17}
+  m_MinSize: {x: 102, y: 121}
+  m_MaxSize: {x: 4002, y: 4021}
+  m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 17}
   - {fileID: 18}
   - {fileID: 12}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -440,9 +440,9 @@ MonoBehaviour:
     height: 343
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: b2a7fcff
-    m_LastClickedID: -219214
-    m_ExpandedIDs: a4fbffffd4fbffffd6fbffffdafbffff00000000ce250000e62500000426000022260000
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: 86bcffff2cbdfffff6bdffffeef5ffff9af6ffff6af7ffffdafbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -524,7 +524,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.18375841, y: 0.0035357755, z: -0.00066098024, w: -0.9829649}
     speed: 2
-    m_Value: {x: -0.18375841, y: 0.0035357755, z: -0.00066098024, w: -0.9829649}
+    m_Value: {x: -0.1837584, y: 0.0035357752, z: -0.00066098024, w: -0.9829648}
   m_Size:
     m_Target: 10.829902
     speed: 2
@@ -576,20 +576,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Resources
+    - Assets/Scripts/NonMonoBehaviours/States
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources
+  - Assets/Scripts/NonMonoBehaviours/States
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\CG-College\Documents\Unity Projects\MMBN Overhaul\Prototypes\MMBN
+  m_LastProjectPath: C:\Users\CG-College\Documents\GitHub\MMBNOverhaulPrototype\MMBNOverhaul\Prototypes\MMBN
     Battle System Prototype
   m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 47}
-    m_SelectedIDs: 64250000
-    m_LastClickedID: 9572
-    m_ExpandedIDs: 00000000f42400001e250000462500005e250000642500006c25000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 155}
+    m_SelectedIDs: 36260000
+    m_LastClickedID: 9782
+    m_ExpandedIDs: 00000000f42400002e2500007c250000a0250000d8250000ec25000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -617,7 +617,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000f42400001e250000462500005e25000064250000
+    m_ExpandedIDs: 00000000f42400002e2500007c250000a0250000d8250000ec250000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -642,9 +642,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 942b0000
+    m_LastClickedInstanceID: 11156
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 
     m_RenameOverlay:
       m_UserAcceptedRename: 0

@@ -16,10 +16,10 @@ public class PlayerBattleMovement : BattleMovementState
 	protected override void HandleMovement()
 	{
 		// check player input, move navi accordingly
-		bool moveLeft = 				Input.GetKeyDown(controls.moveLeft);
-		bool moveRight = 				Input.GetKeyDown(controls.moveRight);
-		bool moveUp = 					Input.GetKeyDown(controls.moveUp);
-		bool moveDown = 				Input.GetKeyDown(controls.moveDown);
+		bool moveLeft = 				Input.GetKey(controls.moveLeft);
+		bool moveRight = 				Input.GetKey(controls.moveRight);
+		bool moveUp = 					Input.GetKey(controls.moveUp);
+		bool moveDown = 				Input.GetKey(controls.moveDown);
 
 		PanelController currentPanel = 	mover.panelCurrentlyOn;
 		PanelController toMoveTo = 		null;
@@ -51,12 +51,8 @@ public class PlayerBattleMovement : BattleMovementState
 		}	
 
 		if (moved)
-			ResetDelay();
+			ResetMoveDelay();
 	}
 
-	void ResetDelay()
-	{
-		moveDelay = baseMoveDelay;
-	}
 	
 }

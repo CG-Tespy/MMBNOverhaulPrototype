@@ -6,8 +6,8 @@ using UnityEngine.Events;
 
 public abstract class BattleMovementState : State
 {
-	protected const float baseMoveDelay = 0.25f;
-	protected float moveDelay = 0.25f;
+	protected const float baseMoveDelay = 0.5f;
+	protected float moveDelay = 0.5f;
 
 	protected float moveDistance = 1f;
 	protected LivingEntityController mover;
@@ -38,10 +38,17 @@ public abstract class BattleMovementState : State
 			HandleMovement();
 		else 
 			moveDelay -= Time.deltaTime;
+
+		Debug.Log("Time delta time in battle movement is " + Time.deltaTime);
 		
 	}
 
 	protected abstract void HandleMovement();
 
+	protected virtual void ResetMoveDelay()
+	{
+		moveDelay = baseMoveDelay;
+		canMove = false;
+	}
 	
 }
