@@ -18,13 +18,8 @@ class NaviBattleStates
 
 
 }
-public class NaviBattleController : LivingEntityController, IPausable
+public class NaviBattleController : LivingEntityController
 {
-	#region Events
-	public UnityEvent Paused { get; protected set; }
-	public UnityEvent Unpaused { get; protected set; }
-
-	#endregion
 
 	#region Fields
 	NaviBattleStates states;
@@ -39,15 +34,14 @@ public class NaviBattleController : LivingEntityController, IPausable
 		get { return _naviInfo as LivingEntityInfo; }
 	}
 
-	public bool isPaused { get; protected set; }
 	BattlefieldManager battleField { get { return BattlefieldManager.instance; } }
 
 	#endregion
 	protected override void Awake()
 	{
 		base.Awake();
-		isPaused = false;
 		animator = GetComponent<Animator>();
+		
 		
 	}
 	// Use this for initialization
@@ -57,8 +51,8 @@ public class NaviBattleController : LivingEntityController, IPausable
 		states = new NaviBattleStates(this);
 		movementHandler.ChangeState(states.playerControlled);
 		MoveToCenterOfOwnSide();
+		StartCoroutine(HandleBlinking());
 		
-		WatchForGamePause();
 		
 	}
 	
@@ -68,12 +62,12 @@ public class NaviBattleController : LivingEntityController, IPausable
 		base.Update();
 	}
 
-	protected virtual void FixedUpdate()
+	protected override void FixedUpdate()
 	{
+		base.FixedUpdate();
+
 		if (!isPaused)
-		{
 			movementHandler.Execute();
-		}
 	}
 
 	/// <summary>
@@ -85,31 +79,55 @@ public class NaviBattleController : LivingEntityController, IPausable
 		// side of the battlefield
 		int centerX = (int) battleField.dimensions.x / 4;
 		int centerY = (int) battleField.dimensions.y / 2;
-		Debug.Log("center panel x: " + centerX + " Center y: " + centerY);
+		//Debug.Log("center panel x: " + centerX + " Center y: " + centerY);
 		PanelController centerPanel = battleField.panelGrid[centerX, centerY];
 		Vector3 centerPos = centerPanel.transform.position;
 		centerPos.y = transform.position.y;
 		transform.position = centerPos;
 	}
 
-	void WatchForGamePause()
+	protected override void WatchForGamePause()
 	{
-		GameController gameController = GameController.instance;
-		gameController.Paused.AddListener(Pause);
-		gameController.Unpaused.AddListener(Unpause);
+		base.WatchForGamePause();
+	}
+
+	IEnumerator HandleBlinking()
+	{
+		float timer = entityInfo.invincibilityTime;
+
+		while (true)
+		{
+			if (!isPaused)
+			{
+				if (isInvincible)
+				{
+					renderer.enabled = !renderer.enabled;
+					timer -= Time.deltaTime;
+				}
+				
+				if (timer <= 0)
+				{
+					isInvincible = false;
+					renderer.enabled = true;
+					timer = entityInfo.invincibilityTime;
+				}
+			}
+
+			yield return null;
+		}
 	}
 
 	#region IPausable
 
-	public void Pause()
+	public override void Pause()
 	{
-		isPaused = true;
+		base.Pause();
 		animator.enabled = false;
 	}
 
-	public void Unpause()
+	public override void Unpause()
 	{
-		isPaused = false;
+		base.Unpause();
 		animator.enabled = true;
 	}
 

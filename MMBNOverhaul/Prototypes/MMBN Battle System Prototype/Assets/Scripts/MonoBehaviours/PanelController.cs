@@ -39,10 +39,10 @@ public class PanelController : ObservableMonoBehaviour, IBattlefieldPanel, IPaus
 
     public Material material
 	{
-		get { return panelInfo.material; }
+		get { return centerRenderer.material; }
 		set 
 		{ 
-			panelInfo.material = value; 
+			//panelInfo.material = value; 
 			//renderer.material = value; 
 			centerRenderer.material = value;
 		}
@@ -50,7 +50,7 @@ public class PanelController : ObservableMonoBehaviour, IBattlefieldPanel, IPaus
 
     public PanelType type
 	{
-	 	get {return ((IBattlefieldPanel)panelInfo).type; }
+	 	get { return ((IBattlefieldPanel)panelInfo).type; }
 	 	set { panelInfo.type = value; }
 	}
 
@@ -180,11 +180,16 @@ public class PanelController : ObservableMonoBehaviour, IBattlefieldPanel, IPaus
 	{
 		panelInfo.Init(this);
 
+		/*
 		if (panelInfo.name.Contains("Cra"))
 			Debug.Log("Applying cracked panel data.");
+			*/
 			
 		if (panelInfo.material != null)
 			centerRenderer.material = panelInfo.material;
+		else
+			centerRenderer.material = renderer.material;
+		
 
 		centerRenderer.material.mainTexture = panelInfo.texture;
 			

@@ -8,7 +8,15 @@ using UnityEngine.Events;
 public class LivingEntityStats
 {
 
-	public Stat damage, health;
+	public Stat damage = new Stat();
+	public Stat health = new Stat();
+
+	public LivingEntityStats(LivingEntityStats toCopy)
+	{
+		this.damage = toCopy.damage.Copy();
+		this.health = toCopy.health.Copy();
+
+	}
 
 	public void Init()
 	{
@@ -20,6 +28,11 @@ public class LivingEntityStats
 		health.effectiveMinVal = health.minVal;
 		health.effectiveVal = health.val;
 		
+	}
+
+	public LivingEntityStats Copy()
+	{
+		return new LivingEntityStats(this);
 	}
 
 	

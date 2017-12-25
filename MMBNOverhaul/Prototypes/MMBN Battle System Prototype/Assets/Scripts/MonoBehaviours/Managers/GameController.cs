@@ -21,6 +21,14 @@ public class GameController : MonoBehaviour
 
 	Controls.GeneralControls generalControls;
 
+	[SerializeField] NaviBattleController _navi;
+
+	public NaviBattleController navi
+	{
+		get { return _navi; }
+		protected set { _navi = value; }
+	}
+
 	#endregion
 
 

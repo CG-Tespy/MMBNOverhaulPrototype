@@ -10,7 +10,7 @@ public class PlayerBattleMovement : BattleMovementState
 	public override void Execute()
 	{
 		base.Execute();
-		Debug.Log("Player movement state executing!");
+		//Debug.Log("Player movement state executing!");
 	}
 	
 	protected override void HandleMovement()

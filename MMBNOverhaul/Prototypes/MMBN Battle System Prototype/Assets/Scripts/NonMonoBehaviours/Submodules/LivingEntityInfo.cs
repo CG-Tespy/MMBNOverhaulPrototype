@@ -21,13 +21,14 @@ public abstract class LivingEntityInfo : ILivingEntity
 	#region Fields
 
 	#region Backing Fields
-	[SerializeField] protected int _id;
 	[SerializeField] protected string _name;
+	[SerializeField] protected int _id;
 	[SerializeField] protected string _description;
 	[SerializeField] protected List<DamageType> _resistances;
 	[SerializeField] protected List<DamageType> _weaknesses;
 	[SerializeField] protected LivingEntityStats _stats;
 	[SerializeField] protected float _invincibilityTime = 0;
+
 	#endregion
 	public AnimationClip[] animations;
 
@@ -177,6 +178,9 @@ public abstract class LivingEntityInfo : ILivingEntity
 			//Debug.Log("Took " + amount + " damage this frame.");
 			health -= amount;
 			effectiveHealth -= amount;
+
+			isInvincible = true;
+
 			TookDamage.Invoke();
 
 			return true;

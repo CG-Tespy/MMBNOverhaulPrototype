@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public abstract class LivingEntityController : MonoBehaviour, ILivingEntity
+public abstract class LivingEntityController : ObservableMonoBehaviour, ILivingEntity, IPausable
 {
 	#region Events
+
+	public UnityEvent Paused { get; protected set; }
+	public UnityEvent Unpaused { get; protected set; }
 	public UnityEvent Died
 	{
 		get { return entityInfo.Died; }
@@ -32,7 +35,7 @@ public abstract class LivingEntityController : MonoBehaviour, ILivingEntity
 	[SerializeField] Combatant _onSideOf;
 	[SerializeField] LivingEntityInfo _entityInfo;
 	GameController gameController;
-	protected BattleMovementModule movementHandler;
+	public BattleMovementModule movementHandler { get; protected set; }
 	protected Animator animator;
 
 	#endregion
@@ -40,33 +43,35 @@ public abstract class LivingEntityController : MonoBehaviour, ILivingEntity
 	#region Implemented through entityInfo
 	public virtual LivingEntityInfo entityInfo 
 	{
-		get { return entityInfo; }
+		get { return _entityInfo; }
+		protected set { _entityInfo = value; }
 
 	}
-    public string description
+    public virtual string description
 	{
-		get { return ((ILivingEntity)entityInfo).description; }
+		get { return entityInfo.description; }
 		set { entityInfo.description = value; }
 	}
 
-    public LivingEntityStats stats 
+    public virtual LivingEntityStats stats 
 	{
-		get { return ((ILivingEntity)entityInfo).stats; }
+		get { return entityInfo.stats; }
 	}
 
-    public int id 
+    public virtual int id 
 	{
-		get { return ((ILivingEntity)entityInfo).id; }
+		get { return entityInfo.id; }
 	}
 
-    public bool isInvincible 
+    public virtual bool isInvincible 
 	{
-		get { return ((ILivingEntity)entityInfo).isInvincible; }
+		get { return entityInfo.isInvincible; }
+		set { entityInfo.isInvincible = value; }
 	}
 
-    public bool isDead
+    public virtual bool isDead
 	{
-		get { return ((ILivingEntity)entityInfo).isDead; }
+		get { return entityInfo.isDead; }
 	}
 
 	public float health 
@@ -93,13 +98,13 @@ public abstract class LivingEntityController : MonoBehaviour, ILivingEntity
 		protected set { stats.health.effectiveMaxVal = value; }
 	}
 
-    public List<DamageType> resistances 
+    public virtual List<DamageType> resistances 
 	{
 		get { return ((ILivingEntity)_entityInfo).resistances; }
 		set { _entityInfo.resistances = value; }
 	}
 
-    public List<DamageType> weaknesses
+    public virtual List<DamageType> weaknesses
 	{
 		get { return ((ILivingEntity)_entityInfo).weaknesses; }
 		set { _entityInfo.weaknesses = value; }
@@ -109,52 +114,39 @@ public abstract class LivingEntityController : MonoBehaviour, ILivingEntity
 
     #endregion
 
-	public PanelController panelCurrentlyOn
-	{
-		get 
-		{
-			// raycast down to find the panel
-			Ray down = new Ray(transform.position, -transform.up);
-			RaycastHit[] hits = Physics.RaycastAll(down, 5f);
-
-			PanelController panel = null;
-
-			foreach (RaycastHit hit in hits)
-			{
-				panel = hit.transform.GetComponent<PanelController>();
-
-				if (panel != null)
-					break;
-			}
-
-			if (panel == null)
-				throw new System.ApplicationException(name + " is for some reason not on a panel.");
-			return panel;
-		}
-	}
+	public PanelController panelCurrentlyOn { get; protected set; }
 
 	public Combatant onSideOf { get { return _onSideOf; } }
+	public bool isPaused { get; protected set; }
     #endregion
 
     #region Methods
     #region Initialization
 
-    protected virtual void Awake()
+    protected override void Awake()
 	{
+		base.Awake();
 		animator = GetComponent<Animator>();
-	}
-	protected virtual void Start () 
-	{
 		stats.Init();
+		Paused = new UnityEvent();
+		Unpaused = new UnityEvent();
+		isPaused = false;
+	}
+	protected override void Start () 
+	{
+		base.Start();
 		gameController = GameController.instance;
+		WatchForGamePause();
 
 		// the movement handler needs access to things like the game controller, 
 		// hence it being initialized here
 		movementHandler = new BattleMovementModule();
 		movementHandler.Init(this);
+		panelCurrentlyOn = GetPanelCurrentlyOn();
 	}
 
 	#endregion
+	
 	#region Implemented through entityInfo
     public virtual bool Die()
     {
@@ -185,12 +177,63 @@ public abstract class LivingEntityController : MonoBehaviour, ILivingEntity
 	#endregion
 	
     #region Other MonoBehaviour funcs
-	// Update is called once per frame
-	protected virtual void Update () 
+
+	protected override void FixedUpdate()
 	{
-		
+		base.FixedUpdate();
+
+		if (!isPaused)
+			panelCurrentlyOn = GetPanelCurrentlyOn();
 	}
 
+	// Update is called once per frame
+	protected override void Update () 
+	{
+		base.Update();
+	}
+
+	#endregion
+
+	#region IPausable
+	public virtual void Pause()
+	{
+		isPaused = true;
+	}
+
+	public virtual void Unpause()
+	{
+		isPaused = false;
+	}
+	#endregion
+
+	#region Helper Funcs
+
+	protected virtual void WatchForGamePause()
+	{
+		gameController.Paused.AddListener(Pause);
+		gameController.Unpaused.AddListener(Unpause);
+	}
+
+	protected virtual PanelController GetPanelCurrentlyOn()
+	{
+		Ray down = new Ray(transform.position, -transform.up);
+		RaycastHit[] hits = Physics.RaycastAll(down, 5f);
+
+		PanelController panel = null;
+
+		foreach (RaycastHit hit in hits)
+		{
+			panel = hit.transform.GetComponent<PanelController>();
+
+			if (panel != null)
+				break;
+		}
+
+		if (panel == null)
+			throw new System.NullReferenceException(name + " is for some reason not on a panel.");
+		
+		return panel;
+	}
 	#endregion
 
 	#endregion

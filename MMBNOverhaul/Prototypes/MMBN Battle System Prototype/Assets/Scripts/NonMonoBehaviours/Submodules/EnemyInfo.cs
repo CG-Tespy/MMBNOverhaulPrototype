@@ -11,15 +11,14 @@ public class EnemyInfo : LivingEntityInfo, System.IEquatable<EnemyInfo>
 	#region Fields
 
 	#region Backing Fields
-	[SerializeField] float _moveSpeed;
-	[SerializeField] float _sightRange = 5f;
-	[SerializeField] float _sightAngle = 50f;
 
 	[SerializeField] int _contactDamage = 1;
-	[SerializeField] float _pushbackForce;
-	[SerializeField] Vector3 _extraPushback;
 	[SerializeField] Sprite _sprite = null;
 	[SerializeField] Mesh _mesh = null;
+
+
+	[SerializeField] protected EnemyAIContainer _aiContainer;
+	protected EnemyAI aI; 
 
 	#endregion
 
@@ -28,9 +27,6 @@ public class EnemyInfo : LivingEntityInfo, System.IEquatable<EnemyInfo>
 	#region Properties
 
 	#region For Backing Fields
-	public float moveSpeed { get { return _moveSpeed; } }
-	public float sightRange { get { return _sightRange; } }
-	public float sightAngle { get { return _sightAngle; } }
 
 	public int contactDamage
 	{
@@ -38,17 +34,6 @@ public class EnemyInfo : LivingEntityInfo, System.IEquatable<EnemyInfo>
 		protected set { _contactDamage = value; }
 	}
 
-	public float pushbackForce
-	{
-		get { return _pushbackForce; }
-		protected set { _pushbackForce = value; }
-	}
-
-	public Vector3 extraPushback 
-	{
-		get { return _extraPushback; }
-		protected set { _extraPushback = value; }
-	}
 	public Sprite sprite 
 	{
 		get { return _sprite; }
@@ -59,6 +44,12 @@ public class EnemyInfo : LivingEntityInfo, System.IEquatable<EnemyInfo>
 		get { return _mesh; }
 	}
 
+	public EnemyAIContainer aiContainer 
+	{
+		get { return _aiContainer; }
+		protected set { _aiContainer = value; }
+	}
+
 	#endregion
 
 	#endregion
@@ -66,20 +57,36 @@ public class EnemyInfo : LivingEntityInfo, System.IEquatable<EnemyInfo>
 	#region Methods
     public EnemyInfo() : base() {}
 
+
 	public bool Equals(EnemyInfo other)
 	{
-		bool bothNullSprites = this.sprite == null && other.sprite == null;
-		bool bothNullMeshes = this.mesh == null && other.mesh == null;
+		return (this.id == other.id);
+	}
+
+	public EnemyInfo Copy()
+	{
+		EnemyInfo copy = 			new EnemyInfo();
+		copy._contactDamage = 		this._contactDamage;
+
+		copy._name = 				string.Copy(this._name);
+		copy._description = 		this._description;
+
+		copy._id = 					this._id;
+		copy._invincibilityTime = 	this._invincibilityTime;
 		
-		bool sameSprites = bothNullSprites || (this.sprite.name == other.sprite.name);
-		bool sameMeshes = bothNullMeshes || (this.mesh.name == other.mesh.name);
-		bool sameGraphics = sameSprites && sameMeshes;
+		
+		copy._stats = 				new LivingEntityStats(this.stats);
+		copy._resistances = 		new List<DamageType>(this._resistances);
+		copy._weaknesses = 			new List<DamageType>(this._weaknesses);
 
-		bool sameMaxHealth = this.maxHealth == other.maxHealth;
-		bool sameInvincibilityTime = this.invincibilityTime == other.invincibilityTime;
+		copy._sprite = 				this.sprite;
+		copy._mesh = 				this._mesh;
+		copy.animations = 			this.animations;
 
-		return (sameGraphics && sameMaxHealth && sameInvincibilityTime);
+		copy.aiContainer = 			this.aiContainer;
 
+		return copy;
+		
 	}
 
 	#endregion

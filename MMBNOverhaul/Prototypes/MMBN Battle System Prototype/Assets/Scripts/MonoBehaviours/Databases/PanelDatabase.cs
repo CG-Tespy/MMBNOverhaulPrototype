@@ -15,6 +15,7 @@ public class PanelDatabase : MonoBehaviour
 		instance = this;
 		EnforceUniqueIDs();
 	}
+	
 	void EnforceUniqueIDs()
 	{
 		List<PanelInfo> panelsCopy = panels.OrderBy(panel => panel.id).ToList();

@@ -67,32 +67,32 @@ public abstract class ObservableMonoBehaviour : MonoBehaviour
 
 	// TODO: Add all the methods that fire the events
 
-	public virtual void OnTriggerEnter(Collider other)
+	protected virtual void OnTriggerEnter(Collider other)
 	{
 		mBEvents.OnTriggerEnter.Invoke(other);
 	}
 
-	public virtual void OnTriggerStay(Collider other)
+	protected virtual void OnTriggerStay(Collider other)
 	{
 		mBEvents.OnTriggerStay.Invoke(other);
 	}
 
-	public virtual void OnTriggerExit(Collider other)
+	protected virtual void OnTriggerExit(Collider other)
 	{
 		mBEvents.OnTriggerExit.Invoke(other);
 	}
 
-	public virtual void OnCollisionEnter(Collision other)
+	protected virtual void OnCollisionEnter(Collision other)
 	{
 		mBEvents.OnCollisionEnter.Invoke(other);
 	}
 
-	public virtual void OnCollisionStay(Collision other)
+	protected virtual void OnCollisionStay(Collision other)
 	{
 		mBEvents.OnCollisionStay.Invoke(other);
 	}
 
-	public virtual void OnCollisionExit(Collision other)
+	protected virtual void OnCollisionExit(Collision other)
 	{
 		mBEvents.OnCollisionExit.Invoke(other);
 	}

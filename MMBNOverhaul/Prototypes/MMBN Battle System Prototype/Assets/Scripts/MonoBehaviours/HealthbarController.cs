@@ -41,12 +41,13 @@ public class HealthbarController : MonoBehaviour, IPausable
 
 	int entityCurrentHealth
 	{
-		get { return (int) entity.effectiveHealth; }
+		get { return Mathf.CeilToInt(entity.effectiveHealth); }
 	}
 
 	void Awake()
 	{
 		isPaused = false;
+		healthToDisplay = displayedHealth;
 	}
 	// Use this for initialization
 	void Start () 
@@ -96,7 +97,7 @@ public class HealthbarController : MonoBehaviour, IPausable
 			{
 				healthDiff = (int)Mathf.Abs(entityCurrentHealth - displayedHealth);
 
-				if (healthDiff == 0 )
+				if (healthDiff <= 10 )
 				{
 					healthToDisplay = entityCurrentHealth;
 					healthAnchor = displayedHealth;
@@ -112,11 +113,12 @@ public class HealthbarController : MonoBehaviour, IPausable
 
 					// make health lerping go faster if there is small-enough difference between the 
 					// displayed health and actual health
+					
 					if (healthDiff > 0 && healthDiff <= 100)
 						rawHealthToDisplay += Mathf.Sign(entityCurrentHealth - displayedHealth);
 					
-					
-					healthToDisplay = Mathf.Clamp(Mathf.CeilToInt(rawHealthToDisplay), 0, entityCurrentHealth);
+					// don't let displayed health go into the negatives
+					healthToDisplay = Mathf.Max(Mathf.CeilToInt(rawHealthToDisplay), 0);
 
 					timer++;
 				}

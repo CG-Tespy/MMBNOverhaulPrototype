@@ -75,6 +75,7 @@ public class Stat : System.IEquatable<Stat>, System.IComparable<Stat>
 	public Stat Copy()
 	{
 		Stat newStat = new Stat(val, minVal, maxVal, name, description);
+		
 		newStat.effectiveVal = this.effectiveVal;
 		newStat.val = this.val;
 

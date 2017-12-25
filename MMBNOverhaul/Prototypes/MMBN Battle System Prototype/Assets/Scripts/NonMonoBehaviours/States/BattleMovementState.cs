@@ -6,11 +6,15 @@ using UnityEngine.Events;
 
 public abstract class BattleMovementState : State
 {
-	protected const float baseMoveDelay = 0.25f;
-	protected float moveDelay = 0.25f;
+	#region Fields
 
 	protected float moveDistance = 1f;
 	protected LivingEntityController mover;
+	#endregion
+
+	#region Properties
+	protected float baseMoveDelay { get; set; }
+	protected float moveDelay { get; set; }
 
 	protected virtual LivingEntityInfo moverInfo 
 	{
@@ -23,8 +27,14 @@ public abstract class BattleMovementState : State
 		get { return Controls.BattleControls.instance; }
 	}
 
+	#endregion
+
+	#region Methods
+
 	public virtual void Init(LivingEntityController controller)
 	{
+		baseMoveDelay = 0.25f;
+		moveDelay = baseMoveDelay;
 		canMove = false;
 		this.mover = controller;
 	}
@@ -39,7 +49,7 @@ public abstract class BattleMovementState : State
 		else 
 			moveDelay -= Time.deltaTime;
 
-		Debug.Log("Time delta time in battle movement is " + Time.deltaTime);
+		//Debug.Log("Time delta time in battle movement is " + Time.deltaTime);
 		
 	}
 
@@ -51,4 +61,5 @@ public abstract class BattleMovementState : State
 		canMove = false;
 	}
 	
+	#endregion
 }
