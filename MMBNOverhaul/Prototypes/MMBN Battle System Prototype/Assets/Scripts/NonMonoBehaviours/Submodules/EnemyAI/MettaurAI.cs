@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System.Linq;
 
 public class MettaurAI : EnemyAI
 {
@@ -11,7 +12,6 @@ public class MettaurAI : EnemyAI
 	{
 		NaviBattleController navi;
 		GameController gameController;
-		BattlefieldManager battlefield;
 
 		public override void Init(LivingEntityController enemy)
 		{
@@ -20,7 +20,7 @@ public class MettaurAI : EnemyAI
 			moveDelay = baseMoveDelay;
 			gameController = GameController.instance;
 			navi = gameController.navi;
-			battlefield = BattlefieldManager.instance;
+			//battlefield = BattlefieldManager.instance;
 		}
 
 		public override void Execute()
@@ -69,9 +69,14 @@ public class MettaurAI : EnemyAI
 
 	#endregion
 
+	static List<EnemyController> mettsInField = new List<EnemyController>();
+	static EnemyController activeMett = null;
+	static int activeMettIndex = 0;
+	static bool mettsOrdered = false;
+
 	MettaurMovement _movementStyle = new MettaurMovement();
 	protected float shockwaveDamage = 10;
-	protected float shockwaveSpeed = 0.75f;
+	protected float shockwaveSpeed = 1f;
 
 	GameObject shockWaveObject = null;
 	protected override BattleMovementState movementStyle
@@ -83,6 +88,8 @@ public class MettaurAI : EnemyAI
 	public override void Init(EnemyController mett)
 	{
 		base.Init(mett);
+		mettsInField.Add(mett);
+
 		canAttack = false;
 		// ^make the first mettaur wait before attacking
 
@@ -91,11 +98,21 @@ public class MettaurAI : EnemyAI
 
 		movementStyle.Init(mett);
 		enemy.movementHandler.ChangeState(movementStyle);
+
+		mett.mBEvents.Destroy.AddListener(OnDestroy);
 	}
 
 	public override void Execute()
 	{
+		if (!mettsOrdered)
+			OrderMetts();
 		
+		if (activeMett != this.enemy)
+		{
+			this.enemy.Pause();
+			return;
+		}
+
 		base.Execute();
 		Debug.Log("Executing mettaur ai!");
 	}
@@ -126,5 +143,41 @@ public class MettaurAI : EnemyAI
 
 		Debug.Log(enemy.name + " created a shockwave!");
 		ResetAttackDelay();
+		PassToNextMett();
 	}
+
+	void OrderMetts()
+	{
+		// order the metts to the ones further to the left act first
+		mettsInField = new List<EnemyController>(mettsInField.OrderBy(mett => mett.transform.position.x));
+
+		// set the first one as the active mett, so it acts first
+		activeMett = mettsInField[activeMettIndex];
+
+		mettsOrdered = true;
+	}
+
+	void OnDestroy()
+	{
+		mettsInField.Remove(enemy);
+
+		if (activeMett == enemy && mettsInField.Count > 0)
+		{
+			activeMettIndex = 0;
+			activeMett = mettsInField[activeMettIndex];
+			activeMett.Unpause();
+		}
+	}
+
+	void PassToNextMett()
+	{
+		activeMettIndex++;
+
+		if (activeMettIndex >= mettsInField.Count)
+			activeMettIndex = 0;
+
+		activeMett = mettsInField[activeMettIndex];
+		activeMett.Unpause();
+	}
+	
 }

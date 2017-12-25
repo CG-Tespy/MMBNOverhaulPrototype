@@ -10,6 +10,7 @@ public abstract class BattleMovementState : State
 
 	protected float moveDistance = 1f;
 	protected LivingEntityController mover;
+    protected BattlefieldManager battlefield;
 	#endregion
 
 	#region Properties
@@ -33,6 +34,8 @@ public abstract class BattleMovementState : State
 
 	public virtual void Init(LivingEntityController controller)
 	{
+        battlefield = BattlefieldManager.instance;
+
 		baseMoveDelay = 0.25f;
 		moveDelay = baseMoveDelay;
 		canMove = false;

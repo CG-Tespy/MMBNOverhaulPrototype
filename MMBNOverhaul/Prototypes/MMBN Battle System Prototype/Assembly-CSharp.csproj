@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\MonoBehaviours\AI Containers\EnemyAIContainer.cs" />
+     <Compile Include="Assets\Scripts\MonoBehaviours\AI Containers\HammerAIContainer.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\AI Containers\MettaurAIContainer.cs" />
+     <Compile Include="Assets\Scripts\MonoBehaviours\Attacks\AttackBehaviour.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\Attacks\Shockwave.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\ControlsHandler.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\Databases\EnemyDatabase.cs" />
@@ -81,9 +83,9 @@
      <Compile Include="Assets\Scripts\NonMonoBehaviours\States\PanelState.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\States\PlayerBattleMovement.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\States\State.cs" />
-     <Compile Include="Assets\Scripts\NonMonoBehaviours\Submodules\Attacks\AttackBehaviour.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Submodules\BattleMovementModule.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Submodules\EnemyAI\EnemyAI.cs" />
+     <Compile Include="Assets\Scripts\NonMonoBehaviours\Submodules\EnemyAI\HammerAI.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Submodules\EnemyAI\MettaurAI.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Submodules\EnemyInfo.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Submodules\LivingEntityInfo.cs" />

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/Scenes/scene1.unity
+- path: Assets/Resources/Scenes/TwoHammerBattle.unity
   isLoaded: 1
   isActive: 1

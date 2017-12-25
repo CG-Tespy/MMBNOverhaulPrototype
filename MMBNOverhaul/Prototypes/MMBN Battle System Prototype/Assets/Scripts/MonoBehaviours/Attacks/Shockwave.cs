@@ -34,8 +34,9 @@ public class Shockwave : AttackBehaviour
 		ApplyShockwaveEffect();
 	}
 
-	void OnDestroy()
+	protected override void OnDestroy()
 	{
+		base.OnDestroy();
 		panelPreviouslyOn.material = panelMats[panelPreviouslyOn];
 	}
 

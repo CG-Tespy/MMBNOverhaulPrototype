@@ -51,7 +51,7 @@ public class EnemyController : LivingEntityController
 	{
 		base.Start();
 		enemyDatabase = EnemyDatabase.instance;
-
+		PositionSelfOnPanel();
 		SetupEnemyInfo();
 		SetupAI();
 	}
@@ -66,7 +66,7 @@ public class EnemyController : LivingEntityController
 				ai.Execute();
 
 			movementHandler.Execute();
-			//CheckDeath();
+			CheckDeath();
 		}
 	}
 
@@ -97,6 +97,14 @@ public class EnemyController : LivingEntityController
 		Destroy(containerClone.gameObject);
 
 		ai.Init(this);
+	}
+
+	void PositionSelfOnPanel()
+	{
+		Vector3 newPos = panelCurrentlyOn.transform.position;
+		newPos.y = transform.position.y;
+
+		transform.position = newPos;
 	}
 	#endregion
 	#endregion

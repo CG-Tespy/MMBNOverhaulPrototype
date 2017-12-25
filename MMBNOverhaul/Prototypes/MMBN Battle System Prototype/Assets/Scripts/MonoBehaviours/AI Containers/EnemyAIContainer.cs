@@ -7,6 +7,6 @@ using UnityEngine.Events;
 public class EnemyAIContainer : MonoBehaviour 
 {
 
-	public virtual EnemyAI ai { get; }
+	public virtual EnemyAI ai { get; protected set; }
 	
 }

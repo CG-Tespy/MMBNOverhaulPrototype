@@ -91,12 +91,22 @@ public class HealthbarController : MonoBehaviour, IPausable
 
 		int healthDiff = 0;
 
+		bool lerpingDown = false;
+		bool lerpingUp = false;
+
 		while (true)
 		{
 			if (!isPaused)
 			{
 				healthDiff = (int)Mathf.Abs(entityCurrentHealth - displayedHealth);
+				lerpingDown = displayedHealth > entityCurrentHealth;
+				lerpingUp = displayedHealth < entityCurrentHealth;
 
+				if (lerpingDown)
+					PlayerHurtColorChange();
+				else if (lerpingUp)
+					PlayerHealedColorChange();
+					
 				if (healthDiff <= 10 )
 				{
 					healthToDisplay = entityCurrentHealth;

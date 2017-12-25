@@ -18,16 +18,20 @@ public class MonoBehaviourEvents
 
 	// TODO: Add the other events all MonoBehaviours have
 
+	public UnityEvent Destroy { get; protected set; }
+
 
 	public MonoBehaviourEvents()
 	{
-		OnTriggerEnter = new TriggerEvent();
-		OnTriggerStay = new TriggerEvent();
-		OnTriggerExit = new TriggerEvent();
+		OnTriggerEnter = 		new TriggerEvent();
+		OnTriggerStay = 		new TriggerEvent();
+		OnTriggerExit = 		new TriggerEvent();
 
-		OnCollisionEnter = new CollisionEvent();
-		OnCollisionStay = new CollisionEvent();
-		OnCollisionExit = new CollisionEvent();
+		OnCollisionEnter = 		new CollisionEvent();
+		OnCollisionStay = 		new CollisionEvent();
+		OnCollisionExit = 		new CollisionEvent();
+
+		Destroy = 				new UnityEvent();
 	}
 }
 
@@ -95,6 +99,11 @@ public abstract class ObservableMonoBehaviour : MonoBehaviour
 	protected virtual void OnCollisionExit(Collision other)
 	{
 		mBEvents.OnCollisionExit.Invoke(other);
+	}
+
+	protected virtual void OnDestroy()
+	{
+		mBEvents.Destroy.Invoke();
 	}
 	
 }

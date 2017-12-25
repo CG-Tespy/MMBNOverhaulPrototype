@@ -166,7 +166,13 @@ public abstract class LivingEntityController : ObservableMonoBehaviour, ILivingE
 
     public virtual bool TakeDamage(float amount, DamageType type = DamageType.none)
     {
-        return entityInfo.TakeDamage(amount, type);
+		bool tookDamage = entityInfo.TakeDamage(amount, type);
+
+		// don't grant invincibility for panel damage
+        if (tookDamage && type == DamageType.poisonPanel)
+			isInvincible = false;
+
+		return tookDamage;
 		
     }
 

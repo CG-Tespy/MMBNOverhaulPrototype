@@ -10,7 +10,7 @@ using UnityEngine.Events;
 [System.Serializable]
 public abstract class PanelEffectContainer : MonoBehaviour
 {
-	public virtual PanelEffect effect { get; }
+	public virtual PanelEffect effect { get; protected set; }
 
 	protected virtual void Awake() {}
 }
