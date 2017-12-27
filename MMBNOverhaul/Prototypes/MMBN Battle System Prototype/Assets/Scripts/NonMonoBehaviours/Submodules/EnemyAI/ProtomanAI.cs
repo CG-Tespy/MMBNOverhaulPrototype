@@ -13,6 +13,8 @@ public class ProtomanAI : EnemyAI
 		GameController gameController;
 		NaviBattleController navi;
 
+		public bool poisedToAttack { get; protected set; }
+
 		public override void Init(LivingEntityController controller)
 		{
 			base.Init(controller);
@@ -21,6 +23,7 @@ public class ProtomanAI : EnemyAI
 
 			gameController = GameController.instance;
 			navi = gameController.navi;
+			poisedToAttack = false;
 
 		}
 
@@ -28,8 +31,11 @@ public class ProtomanAI : EnemyAI
 		{
 			if (stepsTaken < stepsBeforeAttack)
 			{
+				poisedToAttack = false;
 				// teleport to a random panel on own side
 				List<PanelController> ownSideOfField = battlefield.GetPanelsOnSide(mover.onSideOf) as List<PanelController>;
+				ownSideOfField.Remove(mover.panelCurrentlyOn);
+				// ^ make sure to move to a different panel
 				PanelController randPanel = ownSideOfField[Random.Range(0, ownSideOfField.Count)];
 
 				if (randPanel.traversable)
@@ -44,6 +50,7 @@ public class ProtomanAI : EnemyAI
 			}
 			else 
 			{
+				poisedToAttack = true;
 				// teleport in widesword range of player
 				PanelController frontOfNavi = battlefield.GetPanelRelativeTo(navi.panelCurrentlyOn, 
 																			Direction.right);
@@ -86,14 +93,17 @@ public class ProtomanAI : EnemyAI
 		movementStyle.Init(enemy);
 		enemy.movementHandler.ChangeState(movementStyle);
 
-		baseAttackDelay = 1;
+		baseAttackDelay = movementStyle.baseMoveDelay / 2f;
 		attackDelay = baseAttackDelay;
 	}
 
 	public override void Execute()
 	{
-		if (NaviInWideswordRange() && !canAttack)
+		if (_movementStyle.poisedToAttack)
+		{
+			Debug.Log(enemy.name + " poised to attack!");
 			attackDelay -= Time.deltaTime;
+		}
 
 		if (attackDelay <= 0)
 			canAttack = true;
@@ -120,7 +130,8 @@ public class ProtomanAI : EnemyAI
 		PanelController currentPanel = enemy.panelCurrentlyOn;
 
 		bool inFront = naviPanel.posOnGrid.x == currentPanel.posOnGrid.x - 1;
-		bool vertFlank = inFront && (Mathf.Abs(naviPanel.posOnGrid.y - currentPanel.posOnGrid.y) == 1);
+		int distBetweenPanels = (int)Mathf.Abs(naviPanel.posOnGrid.y - currentPanel.posOnGrid.y);
+		bool vertFlank = inFront && distBetweenPanels == 1;
 
 		return (inFront || vertFlank);
 	}
