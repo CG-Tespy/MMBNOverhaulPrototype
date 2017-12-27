@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\MonoBehaviours\AI Containers\EnemyAIContainer.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\AI Containers\HammerAIContainer.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\AI Containers\MettaurAIContainer.cs" />
+     <Compile Include="Assets\Scripts\MonoBehaviours\AI Containers\ProtomanAIContainer.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\Attacks\AttackBehaviour.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\Attacks\Shockwave.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\ControlsHandler.cs" />
@@ -87,6 +88,7 @@
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Submodules\EnemyAI\EnemyAI.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Submodules\EnemyAI\HammerAI.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Submodules\EnemyAI\MettaurAI.cs" />
+     <Compile Include="Assets\Scripts\NonMonoBehaviours\Submodules\EnemyAI\ProtomanAI.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Submodules\EnemyInfo.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Submodules\LivingEntityInfo.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Submodules\LivingEntityStats.cs" />

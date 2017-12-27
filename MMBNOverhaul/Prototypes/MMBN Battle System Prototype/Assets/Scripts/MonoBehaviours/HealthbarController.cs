@@ -44,6 +44,11 @@ public class HealthbarController : MonoBehaviour, IPausable
 		get { return Mathf.CeilToInt(entity.effectiveHealth); }
 	}
 
+	int entityMaxHealth
+	{
+		get { return (int) entity.effectiveMaxHealth; }
+	}
+
 	void Awake()
 	{
 		isPaused = false;
@@ -107,7 +112,7 @@ public class HealthbarController : MonoBehaviour, IPausable
 				else if (lerpingUp)
 					PlayerHealedColorChange();
 					
-				if (healthDiff <= 10 )
+				if (healthDiff == 0 )
 				{
 					healthToDisplay = entityCurrentHealth;
 					healthAnchor = displayedHealth;
@@ -124,11 +129,20 @@ public class HealthbarController : MonoBehaviour, IPausable
 					// make health lerping go faster if there is small-enough difference between the 
 					// displayed health and actual health
 					
-					if (healthDiff > 0 && healthDiff <= 100)
-						rawHealthToDisplay += Mathf.Sign(entityCurrentHealth - displayedHealth);
 					
+					if (healthDiff > 0 && healthDiff <= 100)
+					{
+						rawHealthToDisplay = Mathf.Lerp(rawHealthToDisplay, entityCurrentHealth, timer / framesToPass);
+						/*
+						float amountAdded = Mathf.Sign(entityCurrentHealth - displayedHealth);
+						rawHealthToDisplay += Mathf.Sign(entityCurrentHealth - displayedHealth);
+						Debug.Log("Adding to health lerping! Amount added: " + amountAdded);
+						*/
+					}
+					
+
 					// don't let displayed health go into the negatives
-					healthToDisplay = Mathf.Max(Mathf.CeilToInt(rawHealthToDisplay), 0);
+					healthToDisplay = (int)Mathf.Clamp(rawHealthToDisplay, 0, entityMaxHealth);
 
 					timer++;
 				}

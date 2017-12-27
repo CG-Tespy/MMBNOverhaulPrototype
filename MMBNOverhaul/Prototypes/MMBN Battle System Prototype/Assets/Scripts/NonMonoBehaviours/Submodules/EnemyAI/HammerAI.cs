@@ -9,7 +9,7 @@ public class HammerAI : EnemyAI
 	public class HammerMovement : BattleMovementState
 	{
 		Vector3 basePosition;
-		bool atBasePosition = true;
+		public bool atBasePosition = true;
 
         protected GameController gameController;
         protected NaviBattleController navi;
@@ -81,11 +81,28 @@ public class HammerAI : EnemyAI
 	public override void Init(EnemyController enemy)
 	{
 		base.Init(enemy);
-		baseAttackDelay = 2;
-		attackDelay = 0;
 
         movementStyle.Init(enemy);
+		baseAttackDelay = movementStyle.baseMoveDelay / 2.5f;
+		attackDelay = baseAttackDelay;
+
 		enemy.movementHandler.ChangeState(movementStyle);
+		canAttack = false;
+	}
+
+	public override void Execute()
+	{
+		// execute the attack delay when not at base position
+		if (!_movementStyle.atBasePosition && !canAttack)
+			attackDelay -= Time.deltaTime;
+
+		if (attackDelay <= 0)
+			canAttack = true;
+
+		if (canAttack)
+			Attack();
+
+		
 	}
 
 	protected override void Attack()
@@ -98,8 +115,19 @@ public class HammerAI : EnemyAI
 		{
 			//TODO: play an animation
 			navi.TakeDamage(damage);
-			ResetAttackDelay();
+			
 		}
+
+		ResetAttackDelay();
+	}
+
+	bool PlayerInAttackRange()
+	{
+		PanelController playerPanel = navi.panelCurrentlyOn;
+		PanelController currentPanel = enemy.panelCurrentlyOn;
+
+		return (playerPanel.posOnGrid.x == currentPanel.posOnGrid.x - 1);
+		
 	}
 	
 }

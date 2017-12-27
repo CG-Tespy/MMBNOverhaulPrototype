@@ -14,8 +14,8 @@ public abstract class BattleMovementState : State
 	#endregion
 
 	#region Properties
-	protected float baseMoveDelay { get; set; }
-	protected float moveDelay { get; set; }
+	public float baseMoveDelay { get; protected set; }
+	public float moveDelay { get; protected set; }
 
 	protected virtual LivingEntityInfo moverInfo 
 	{

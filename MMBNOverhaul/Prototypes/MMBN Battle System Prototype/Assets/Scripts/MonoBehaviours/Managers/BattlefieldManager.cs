@@ -91,6 +91,17 @@ public class BattlefieldManager : MonoBehaviour
 
 	}
 
+	public IList<PanelController> GetPanelsOnSide(Combatant side)
+	{
+		IList<PanelController> result = new List<PanelController>();
+
+		for (int i = 0; i < panels.Count; i++)
+			if (panels[i].owner == side)
+				result.Add(panels[i]);
+
+		return result;
+		
+	}
 	public void ApplyPanelEffectTo(PanelController panel, PanelEffect effect)
 	{
 		panel.effect = effect;

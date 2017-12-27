@@ -1,0 +1,744 @@
+fileFormatVersion: 2
+guid: 4d7c7df1c8ed98247b6c7ebe4b6d0cd1
+timeCreated: 1514384874
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: MMBN6 Darkmech_0
+    21300002: MMBN6 Darkmech_1
+    21300004: MMBN6 Darkmech_2
+    21300006: MMBN6 Darkmech_3
+    21300008: MMBN6 Darkmech_4
+    21300010: MMBN6 Darkmech_5
+    21300012: MMBN6 Darkmech_6
+    21300014: MMBN6 Darkmech_7
+    21300016: MMBN6 Darkmech_8
+    21300018: MMBN6 Darkmech_9
+    21300020: MMBN6 Darkmech_10
+    21300022: MMBN6 Darkmech_11
+    21300024: MMBN6 Darkmech_12
+    21300026: MMBN6 Darkmech_13
+    21300028: MMBN6 Darkmech_14
+    21300030: MMBN6 Darkmech_15
+    21300032: MMBN6 Darkmech_16
+    21300034: MMBN6 Darkmech_17
+    21300036: MMBN6 Darkmech_18
+    21300038: MMBN6 Darkmech_19
+    21300040: MMBN6 Darkmech_20
+    21300042: MMBN6 Darkmech_21
+    21300044: MMBN6 Darkmech_22
+    21300046: MMBN6 Darkmech_23
+    21300048: MMBN6 Darkmech_24
+    21300050: MMBN6 Darkmech_25
+    21300052: MMBN6 Darkmech_26
+    21300054: MMBN6 Darkmech_27
+    21300056: MMBN6 Darkmech_28
+    21300058: MMBN6 Darkmech_29
+    21300060: MMBN6 Darkmech_30
+    21300062: MMBN6 Darkmech_31
+    21300064: MMBN6 Darkmech_32
+    21300066: MMBN6 Darkmech_33
+    21300068: MMBN6 Darkmech_34
+    21300070: MMBN6 Darkmech_35
+    21300072: MMBN6 Darkmech_36
+    21300074: MMBN6 Darkmech_37
+    21300076: MMBN6 Darkmech_38
+    21300078: MMBN6 Darkmech_39
+    21300080: MMBN6 Darkmech_40
+    21300082: MMBN6 Darkmech_41
+    21300084: MMBN6 Darkmech_42
+    21300086: MMBN6 Darkmech_43
+    21300088: MMBN6 Darkmech_44
+    21300090: MMBN6 Darkmech_45
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 355
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_1
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 355
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_2
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 355
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_3
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 355
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_4
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 355
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_5
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 355
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 305
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_7
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 305
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_8
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 305
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_9
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 305
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_10
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 305
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_11
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 305
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 255
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_13
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 255
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_14
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 255
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_15
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 255
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_16
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 255
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_17
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 255
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 205
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_19
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 205
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_20
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 205
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_21
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 205
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_22
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 205
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_23
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 205
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 155
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_25
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 155
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_26
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 155
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_27
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 155
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_28
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 155
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_29
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 155
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 105
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_31
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 105
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_32
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 105
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_33
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 105
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_34
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 105
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_35
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 105
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 55
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_37
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 55
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_38
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 55
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_39
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 55
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_40
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 55
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_41
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 55
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_42
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 5
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_43
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 5
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_44
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 5
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MMBN6 Darkmech_45
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 5
+        width: 55
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
