@@ -80,7 +80,24 @@ public class ProtomanAI : EnemyAI
 	}
 	
 	float damage = 80;
+	bool panelsFlashing = false;
 	ProtomanMovement _movementStyle = new ProtomanMovement();
+	protected PanelController[] panelsInWideswordRange
+	{
+		get 
+		{ 
+			PanelController[] panels = new PanelController[3];
+
+			PanelController currentPanel = enemy.panelCurrentlyOn;
+
+			PanelController inFront = battlefield.GetPanelRelativeTo(currentPanel, Direction.left);
+			PanelController diagUp = battlefield.GetPanelRelativeTo(inFront, Direction.up);
+			PanelController diagDown = battlefield.GetPanelRelativeTo(inFront, Direction.down);
+
+			return new PanelController[] { inFront, diagUp, diagDown };
+		}
+	}
+
 	protected override BattleMovementState movementStyle
 	{
 		get { return _movementStyle; }
@@ -101,6 +118,21 @@ public class ProtomanAI : EnemyAI
 	{
 		if (_movementStyle.poisedToAttack)
 		{
+			if (!panelsFlashing)
+			{
+				// make the panels flash
+				string matPath = "Materials/Yellow";
+				Material yellow = Resources.Load<Material>(matPath);
+
+				foreach (PanelController panel in panelsInWideswordRange)
+				{
+					if (panel != null)
+						panel.FlashMaterial(yellow, 0.05f, 0.05f);
+				}
+
+				panelsFlashing = true;
+			}
+
 			Debug.Log(enemy.name + " poised to attack!");
 			attackDelay -= Time.deltaTime;
 		}
@@ -122,6 +154,7 @@ public class ProtomanAI : EnemyAI
 		}
 
 		ResetAttackDelay();
+		panelsFlashing = false;
 	}
 
 	bool NaviInWideswordRange()
@@ -135,4 +168,8 @@ public class ProtomanAI : EnemyAI
 
 		return (inFront || vertFlank);
 	}
+
+	
+
+
 }

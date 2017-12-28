@@ -22,6 +22,7 @@ public class PanelController : ObservableMonoBehaviour, IBattlefieldPanel, IPaus
 	[SerializeField] PanelInfo panelInfo;
 
 	GameController gameController;
+	IEnumerator flashCoroutine = null;
 	
 	#endregion 
 	
@@ -151,6 +152,57 @@ public class PanelController : ObservableMonoBehaviour, IBattlefieldPanel, IPaus
 			panelInfo = newPanel;
 			ApplyPanelData();
 		}
+	}
+
+	public void FlashMaterial(Material material, float duration = 1f, float interval = 0.25f)
+	{
+		if (flashCoroutine == null)
+		{
+			flashCoroutine = FlashMaterialCoroutine(material, duration, interval);
+			StartCoroutine(flashCoroutine);
+		}
+		else 
+		{
+			StopCoroutine(flashCoroutine);
+			flashCoroutine = FlashMaterialCoroutine(material, duration, interval);
+			StartCoroutine(flashCoroutine);
+		}
+	}
+
+	IEnumerator FlashMaterialCoroutine(Material material, float duration = 1f, float interval = 0.25f)
+	{
+		Material originalMaterial = this.material;
+
+		this.material = material;
+
+		float timer = duration;
+		float intervalTimer = interval;
+
+		while (timer > 0)
+		{
+			if (!isPaused)
+			{
+				// switch the panel's mat based on the interval timer
+				intervalTimer -= Time.deltaTime;
+
+				if (intervalTimer <= 0)
+				{
+					if (this.material == originalMaterial)
+						this.material = material;
+					else if (this.material = material)
+						this.material = originalMaterial;
+
+					intervalTimer = interval;
+				}
+				
+				timer -= Time.deltaTime;
+			}
+
+			yield return null;
+		}
+
+		this.material = originalMaterial;
+		flashCoroutine = null;
 	}
 
 

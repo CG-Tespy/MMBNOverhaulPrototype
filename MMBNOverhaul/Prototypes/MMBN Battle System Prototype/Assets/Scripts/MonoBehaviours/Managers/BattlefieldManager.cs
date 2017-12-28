@@ -87,7 +87,11 @@ public class BattlefieldManager : MonoBehaviour
 
 		}
 
-		return panelGrid[ (int) resultGridPos.x, (int) resultGridPos.y];
+		// avoid an array index error
+		if (resultGridPos.x < 0 || resultGridPos.y >= dimensions.y)
+			return null;
+		else 
+			return panelGrid[ (int) resultGridPos.x, (int) resultGridPos.y];
 
 	}
 

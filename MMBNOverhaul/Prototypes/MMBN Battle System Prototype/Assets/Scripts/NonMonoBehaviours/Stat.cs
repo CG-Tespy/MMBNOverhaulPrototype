@@ -82,6 +82,119 @@ public class Stat : System.IEquatable<Stat>, System.IComparable<Stat>
 		return newStat;
 	}
 
-	
+	#region Overloaded operators
+
+	public static Stat operator+(Stat stat1, float num1)
+	{
+		stat1.val += num1;
+		stat1.effectiveVal += num1;
+
+		return stat1;
+	}
+
+	public static float operator+(float num1, Stat stat1)
+	{
+		num1 += stat1.effectiveVal;
+
+		return num1;
+	}
+
+	public static int operator+(int num1, Stat stat1)
+	{
+		num1 += (int)stat1.effectiveVal;
+
+		return num1;
+	}
+
+	public static Stat operator-(Stat stat1, float num1)
+	{
+		stat1.val -= num1;
+		stat1.effectiveVal -= num1;
+
+		return stat1;
+	}
+
+	public static float operator-(float num1, Stat stat1)
+	{
+		num1 -= stat1.effectiveVal;
+
+		return num1;
+	}
+
+	public static int operator-(int num1, Stat stat1)
+	{
+		num1 -= (int)stat1.effectiveVal;
+
+		return num1;
+	}
+
+	public static Stat operator*(Stat stat1, float num1)
+	{
+		stat1.val *= num1;
+		stat1.effectiveVal *= num1;
+
+		return stat1;
+	}
+
+	public static float operator*(float num1, Stat stat1)
+	{
+		num1 *= stat1.effectiveVal;
+
+		return num1;
+	}
+
+	public static int operator*(int num1, Stat stat1)
+	{
+		num1 *= (int)stat1.effectiveVal;
+
+		return num1;
+	}
+
+	public static Stat operator/(Stat stat1, float num1)
+	{
+		stat1.val /= num1;
+		stat1.effectiveVal /= num1;
+
+		return stat1;
+	}
+
+	public static float operator/(float num1, Stat stat1)
+	{
+		num1 /= stat1.effectiveVal;
+
+		return num1;
+	}
+
+	public static int operator/(int num1, Stat stat1)
+	{
+		num1 /= (int)stat1.effectiveVal;
+
+		return num1;
+	}
+
+	public static Stat operator%(Stat stat1, float num1)
+	{
+		stat1.val %= num1;
+		stat1.effectiveVal %= num1;
+
+		return stat1;
+	}
+
+	public static float operator%(float num1, Stat stat1)
+	{
+		num1 %= stat1.effectiveVal;
+
+		return num1;
+	}
+
+	public static int operator%(int num1, Stat stat1)
+	{
+		num1 %= (int)stat1.effectiveVal;
+
+		return num1;
+	}
+
+
+	#endregion
 	
 }
