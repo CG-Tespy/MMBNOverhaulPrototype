@@ -14,6 +14,8 @@ public class HammerAI : EnemyAI
         protected GameController gameController;
         protected NaviBattleController navi;
 
+		public UnityEvent ReadyToSlash { get; protected set; }
+
 		public override void Init(LivingEntityController controller)
 		{
 			base.Init(controller);
@@ -25,6 +27,8 @@ public class HammerAI : EnemyAI
 
 			basePosition = mover.panelCurrentlyOn.transform.position;
 			basePosition.y = mover.transform.position.y;
+
+			ReadyToSlash = new UnityEvent();
 		}
 
 		protected override void HandleMovement()
@@ -52,6 +56,7 @@ public class HammerAI : EnemyAI
 
 					mover.transform.position = targetPos;
 					atBasePosition = false;
+					ReadyToSlash.Invoke();
 					ResetMoveDelay();
 				}
 
@@ -88,30 +93,29 @@ public class HammerAI : EnemyAI
 
 		enemy.movementHandler.ChangeState(movementStyle);
 		canAttack = false;
+
+		_movementStyle.ReadyToSlash.AddListener(MakePanelFlash);
+		_movementStyle.ReadyToSlash.AddListener(Attack);
 	}
 
 	public override void Execute()
 	{
-		// execute the attack delay when not at base position
-		if (!_movementStyle.atBasePosition && !canAttack)
-			attackDelay -= Time.deltaTime;
+		// better to have the ai here be event-triggered isntead of relying on 
+		// delay timers, hence this empty execute
 
-		if (attackDelay <= 0)
-			canAttack = true;
-
-		if (canAttack)
-			Attack();
-
-		
 	}
 
 	protected override void Attack()
 	{
-		PanelController playerPanel = navi.panelCurrentlyOn;
-		PanelController toTheLeft = battlefield.GetPanelRelativeTo(	enemy.panelCurrentlyOn, 
-																	Direction.left);
+		enemy.StartCoroutine(AttackCoroutine());
+	}
 
-		if (playerPanel == toTheLeft)
+	IEnumerator AttackCoroutine()
+	{
+		// the attack has to happen after a delay
+		yield return new WaitForSeconds(0.35f + (Time.deltaTime * 2));
+
+		if (PlayerInAttackRange())
 		{
 			//TODO: play an animation
 			navi.TakeDamage(damage);
@@ -119,7 +123,26 @@ public class HammerAI : EnemyAI
 		}
 
 		ResetAttackDelay();
+
 	}
+
+	IEnumerator PanelFlashCoroutine()
+	{
+		// the panel must flash after a two-frame delay, otherwise the wrong panel will flash
+		yield return new WaitForSeconds(Time.deltaTime * 2);
+
+		string matPath = "Materials/Yellow";
+		Material yellow = Resources.Load<Material>(matPath);
+
+		// make the panel to the left of this one flash
+		PanelController panel = battlefield.GetPanelRelativeTo( enemy.panelCurrentlyOn, 
+																Direction.left);
+
+		if (panel != null)
+			panel.FlashMaterial(yellow, 0.25f, 0.05f);
+
+	}
+
 
 	bool PlayerInAttackRange()
 	{
@@ -128,6 +151,11 @@ public class HammerAI : EnemyAI
 
 		return (playerPanel.posOnGrid.x == currentPanel.posOnGrid.x - 1);
 		
+	}
+
+	void MakePanelFlash()
+	{
+		enemy.StartCoroutine(PanelFlashCoroutine());
 	}
 	
 }

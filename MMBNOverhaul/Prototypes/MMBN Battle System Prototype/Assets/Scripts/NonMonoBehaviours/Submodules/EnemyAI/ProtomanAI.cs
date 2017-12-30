@@ -8,12 +8,11 @@ public class ProtomanAI : EnemyAI
 {
 	public class ProtomanMovement : BattleMovementState
 	{
+		public UnityEvent poisedToSlash { get; protected set; }
 		const int stepsBeforeAttack = 4;
 		int stepsTaken = 0;
 		GameController gameController;
 		NaviBattleController navi;
-
-		public bool poisedToAttack { get; protected set; }
 
 		public override void Init(LivingEntityController controller)
 		{
@@ -23,7 +22,7 @@ public class ProtomanAI : EnemyAI
 
 			gameController = GameController.instance;
 			navi = gameController.navi;
-			poisedToAttack = false;
+			poisedToSlash = new UnityEvent();
 
 		}
 
@@ -31,7 +30,6 @@ public class ProtomanAI : EnemyAI
 		{
 			if (stepsTaken < stepsBeforeAttack)
 			{
-				poisedToAttack = false;
 				// teleport to a random panel on own side
 				List<PanelController> ownSideOfField = battlefield.GetPanelsOnSide(mover.onSideOf) as List<PanelController>;
 				ownSideOfField.Remove(mover.panelCurrentlyOn);
@@ -50,7 +48,7 @@ public class ProtomanAI : EnemyAI
 			}
 			else 
 			{
-				poisedToAttack = true;
+				
 				// teleport in widesword range of player
 				PanelController frontOfNavi = battlefield.GetPanelRelativeTo(navi.panelCurrentlyOn, 
 																			Direction.right);
@@ -75,12 +73,22 @@ public class ProtomanAI : EnemyAI
 				stepsTaken = 0;
 				ResetMoveDelay();
 
+				mover.StartCoroutine(InvokePoisedToSlash());
+				
+
 			}
+		}
+
+		IEnumerator InvokePoisedToSlash()
+		{
+			// Need poisedtoSlash to invoke on a two-frame delay;
+			// otherwise, the wrong panels will flash.
+			yield return new WaitForSeconds(Time.deltaTime * 2);
+			poisedToSlash.Invoke();
 		}
 	}
 	
 	float damage = 80;
-	bool panelsFlashing = false;
 	ProtomanMovement _movementStyle = new ProtomanMovement();
 	protected PanelController[] panelsInWideswordRange
 	{
@@ -112,41 +120,29 @@ public class ProtomanAI : EnemyAI
 
 		baseAttackDelay = movementStyle.baseMoveDelay / 2f;
 		attackDelay = baseAttackDelay;
+
+		
+		_movementStyle.poisedToSlash.AddListener(MakePanelsFlash);
+		_movementStyle.poisedToSlash.AddListener(Attack);
 	}
 
 	public override void Execute()
 	{
-		if (_movementStyle.poisedToAttack)
-		{
-			if (!panelsFlashing)
-			{
-				// make the panels flash
-				string matPath = "Materials/Yellow";
-				Material yellow = Resources.Load<Material>(matPath);
-
-				foreach (PanelController panel in panelsInWideswordRange)
-				{
-					if (panel != null)
-						panel.FlashMaterial(yellow, 0.05f, 0.05f);
-				}
-
-				panelsFlashing = true;
-			}
-
-			Debug.Log(enemy.name + " poised to attack!");
-			attackDelay -= Time.deltaTime;
-		}
-
-		if (attackDelay <= 0)
-			canAttack = true;
-
-		if (canAttack)
-			Attack();
+		// better to have nothing in the base execute work in this case, 
+		// hence this empty Execute
 		
 	}
 
 	protected override void Attack()
 	{
+		enemy.StartCoroutine(AttackCoroutine());
+	}
+
+	IEnumerator AttackCoroutine()
+	{
+		// after a delay, launch the attack
+		yield return new WaitForSeconds(0.35f);
+		
 		if (NaviInWideswordRange())
 		{
 			//TODO: play animation
@@ -154,7 +150,19 @@ public class ProtomanAI : EnemyAI
 		}
 
 		ResetAttackDelay();
-		panelsFlashing = false;
+
+	}
+
+	void MakePanelsFlash()
+	{
+		// make the panels in widesword range flash
+		string matPath = "Materials/Yellow";
+		Material yellow = Resources.Load<Material>(matPath);
+
+		foreach (PanelController panel in panelsInWideswordRange)
+			if (panel != null)
+				panel.FlashMaterial(yellow, 0.25f, 0.05f);
+		
 	}
 
 	bool NaviInWideswordRange()
