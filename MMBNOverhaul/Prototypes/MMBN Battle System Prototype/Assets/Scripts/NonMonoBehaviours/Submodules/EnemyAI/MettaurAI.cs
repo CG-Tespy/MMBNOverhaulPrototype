@@ -107,6 +107,7 @@ public class MettaurAI : EnemyAI
 		if (!mettsOrdered)
 			OrderMetts();
 		
+		// Do nothing if it isn't this mett's turn to act
 		if (activeMett != this.enemy)
 		{
 			this.enemy.Pause();
@@ -119,7 +120,6 @@ public class MettaurAI : EnemyAI
 
 	protected override void Attack()
 	{
-		
 		// spawn a shockwave on the panel to the left of this mettaur
 
 		PanelController toTheLeft = battlefield.GetPanelRelativeTo(enemy.panelCurrentlyOn, Direction.left);
@@ -148,7 +148,10 @@ public class MettaurAI : EnemyAI
 
 	void OrderMetts()
 	{
-		// order the metts to the ones further to the left act first
+		// Makes it so that only one of the metts acts at a time, just like in the original BN 
+		// games.
+
+		// Order the metts to the ones further to the left act first
 		mettsInField = new List<EnemyController>(mettsInField.OrderBy(mett => mett.transform.position.x));
 
 		// set the first one as the active mett, so it acts first
@@ -159,6 +162,8 @@ public class MettaurAI : EnemyAI
 
 	void OnDestroy()
 	{
+		// Avoid messing up the action order. Remove this instance from the 
+		// metts in the field, so the next mett can act as it should.
 		mettsInField.Remove(enemy);
 
 		if (activeMett == enemy && mettsInField.Count > 0)
@@ -171,6 +176,7 @@ public class MettaurAI : EnemyAI
 
 	void PassToNextMett()
 	{
+		// Sets another mett to be the active one, so it can get its turn to act.
 		activeMettIndex++;
 
 		if (activeMettIndex >= mettsInField.Count)

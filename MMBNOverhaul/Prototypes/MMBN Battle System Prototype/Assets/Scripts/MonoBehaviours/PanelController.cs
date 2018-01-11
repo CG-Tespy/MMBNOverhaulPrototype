@@ -32,6 +32,14 @@ public class PanelController : ObservableMonoBehaviour, IBattlefieldPanel, IPaus
 	public bool isPaused { get; protected set; }
 
 	#region Implemented through panelInfo
+	public string panelName
+	{
+		get { return panelInfo.name; }
+	}
+	public int panelId 
+	{
+		get { return panelTypeId; }
+	}
     public bool traversable 
 	{
 		get { return ((IBattlefieldPanel)panelInfo).traversable; }

@@ -8,6 +8,12 @@ public class HammerAI : EnemyAI
 {
 	public class HammerMovement : BattleMovementState
 	{
+		/*
+		Waits until the player is within the hammer's line of sight (the entire row it is on), 
+		and then moves in to attack the player. The actual attacking is handled by the HammerAI 
+		class that has an instance of this as a member.
+		*/
+
 		Vector3 basePosition;
 		public bool atBasePosition = true;
 
@@ -18,6 +24,10 @@ public class HammerAI : EnemyAI
 
 		public override void Init(LivingEntityController controller)
 		{
+			/*
+			Setting up details that will drive how the movement works.
+			 */
+
 			base.Init(controller);
             gameController = GameController.instance;
             navi = gameController.navi;
@@ -36,8 +46,7 @@ public class HammerAI : EnemyAI
 
 			if (atBasePosition)
 			{
-				// move in and slash the player if the player is in the same row as this 
-				// hammer
+				// Check if the player is within line of sight (the same row)
 
 				PanelController playerPanel = navi.panelCurrentlyOn;
 				PanelController currentPanel = mover.panelCurrentlyOn;
@@ -46,9 +55,10 @@ public class HammerAI : EnemyAI
 				if (!inSameRow)
 					return;
 
+				// Now move in to attack the player
 				PanelController movementTarget = battlefield.GetPanelRelativeTo(playerPanel, Direction.right);
 				
-				// but don't if you can't move on that target
+				// Only if the space to move on it traversable, of course
 				if (movementTarget.traversable)
 				{
 					Vector3 targetPos = movementTarget.transform.position;
@@ -56,14 +66,17 @@ public class HammerAI : EnemyAI
 
 					mover.transform.position = targetPos;
 					atBasePosition = false;
-					ReadyToSlash.Invoke();
+
+					ReadyToSlash.Invoke(); 
+					// ^ Signals to the HammerAI object to start the attack
+
 					ResetMoveDelay();
 				}
 
 			}
 			else 
 			{
-				// go back to previous position
+				// Go back to the original position 
 				mover.transform.position = basePosition;
 				ResetMoveDelay();
 				atBasePosition = true;
@@ -100,8 +113,10 @@ public class HammerAI : EnemyAI
 
 	public override void Execute()
 	{
-		// better to have the ai here be event-triggered isntead of relying on 
-		// delay timers, hence this empty execute
+		// Better to have the ai here be event-triggered isntead of relying on 
+		// delay timers, hence this empty execute. 
+		// Another reason why the EnemyAI class might be reworked; it's better for the AI
+		// to react to events by other objects than just update some delay every frame.
 
 	}
 
@@ -113,7 +128,18 @@ public class HammerAI : EnemyAI
 	IEnumerator AttackCoroutine()
 	{
 		// the attack has to happen after a delay
-		yield return new WaitForSeconds(0.35f + (Time.deltaTime * 2));
+		float timer = gameController.frameRate * (0.35f + (Time.deltaTime * 2));
+
+		while (true)
+		{
+			if (!enemy.isPaused)
+				timer -= Time.deltaTime;
+
+			if (timer <= 0)
+				break;
+
+			yield return null;
+		}
 
 		if (PlayerInAttackRange())
 		{

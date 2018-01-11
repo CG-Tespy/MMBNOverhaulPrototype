@@ -141,12 +141,35 @@ public class ProtomanAI : EnemyAI
 	IEnumerator AttackCoroutine()
 	{
 		// after a delay, launch the attack
-		yield return new WaitForSeconds(0.35f);
+		float timer = gameController.frameRate * 0.35f;
+
+		while (true)
+		{
+			if (!enemy.isPaused)
+				timer--;
+			
+			if (timer <= 0)
+				break;
+
+			yield return null;
+		}
 		
 		if (NaviInWideswordRange())
 		{
 			//TODO: play animation
 			navi.TakeDamage(damage);
+		}
+		
+
+		PanelController panelToCrack = battlefield.GetPanelRelativeTo(enemy.panelCurrentlyOn, Direction.left);
+		if (panelToCrack != null)
+		{
+			// check the panel type. If its normal, crack it. If its cracked, break it.
+			if (panelToCrack.panelName == "Cracked Panel")
+				panelToCrack.ChangeTo(PanelDatabase.instance.GetPanel("Broken Panel"));
+			
+			else if (panelToCrack.traversable)
+				panelToCrack.ChangeTo(PanelDatabase.instance.GetPanel("Cracked Panel"));
 		}
 
 		ResetAttackDelay();

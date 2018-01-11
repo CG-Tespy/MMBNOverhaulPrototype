@@ -6,6 +6,11 @@ using UnityEngine.Events;
 
 public abstract class EnemyAI : State
 {
+	/*
+	Each enemy has an instance of this, and each instance gets its execute method called 
+	by the enemy controller when it isn't paused. 
+	 */
+
 	#region Fields
 	protected EnemyController enemy;
 	protected GameController gameController;
@@ -26,6 +31,11 @@ public abstract class EnemyAI : State
 	#region Methods
 	public virtual void Init(EnemyController enemy)
 	{
+		/*
+		The AI needs to know who it belongs to, what is the navi, what is the game controller, 
+		and what it the battlefield. References to these objects make its job easier.
+		 */
+		 
 		this.enemy = enemy;
 		gameController = GameController.instance;
 		battlefield = BattlefieldManager.instance;
@@ -35,6 +45,10 @@ public abstract class EnemyAI : State
 
 	public override void Execute()
 	{
+		// The attack delay ticks down, until it is time to attack. This 
+		// function will probably be removed or reworked when animations get implemented, 
+		// since I've found that it'd be better for the EnemyAI subclasses to work 
+		// by reacting to events, rather than ticking down some delay value every frame.
 		if (!canAttack)
 			attackDelay -= Time.deltaTime;
 		else 

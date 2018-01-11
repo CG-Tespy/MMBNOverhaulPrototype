@@ -11,6 +11,8 @@ public abstract class PanelEffect
 	protected PanelDatabase panelDatabase;
 	protected PanelController panel;
 
+	public string name {get; protected set; }
+
 	public virtual bool isActive { get; set; }
 
 	public virtual void Init(PanelController panel)
