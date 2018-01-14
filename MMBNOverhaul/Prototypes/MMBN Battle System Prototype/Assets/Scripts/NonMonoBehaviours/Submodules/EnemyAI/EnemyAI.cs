@@ -22,7 +22,7 @@ public abstract class EnemyAI : State
 
 	#region Properties
 	
-	protected virtual BattleMovementState movementStyle { get; set; }
+	protected virtual EnemyMovementState movementStyle { get; set; }
 	protected virtual float baseAttackDelay { get; set; }
 	protected virtual float attackDelay { get; set; }
 
@@ -40,7 +40,11 @@ public abstract class EnemyAI : State
 		gameController = GameController.instance;
 		battlefield = BattlefieldManager.instance;
 		navi = gameController.navi;
+		
+		movementStyle.Init(enemy);
+		enemy.movementHandler.ChangeState(movementStyle);
 
+		// Also, in subclasses of this, you'll want to set things like delay vars
 	}
 
 	public override void Execute()

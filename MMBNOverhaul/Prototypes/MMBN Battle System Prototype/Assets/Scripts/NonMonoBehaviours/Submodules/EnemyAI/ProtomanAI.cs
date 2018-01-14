@@ -6,13 +6,11 @@ using UnityEngine.Events;
 
 public class ProtomanAI : EnemyAI
 {
-	public class ProtomanMovement : BattleMovementState
+	public class ProtomanMovement : EnemyMovementState
 	{
 		public UnityEvent poisedToSlash { get; protected set; }
 		const int stepsBeforeAttack = 4;
 		int stepsTaken = 0;
-		GameController gameController;
-		NaviBattleController navi;
 
 		public override void Init(LivingEntityController controller)
 		{
@@ -20,8 +18,6 @@ public class ProtomanAI : EnemyAI
 			baseMoveDelay = 1f;
 			moveDelay = baseMoveDelay;
 
-			gameController = GameController.instance;
-			navi = gameController.navi;
 			poisedToSlash = new UnityEvent();
 
 		}
@@ -31,16 +27,20 @@ public class ProtomanAI : EnemyAI
 			if (stepsTaken < stepsBeforeAttack)
 			{
 				// teleport to a random panel on own side
-				List<PanelController> ownSideOfField = battlefield.GetPanelsOnSide(mover.onSideOf) as List<PanelController>;
-				ownSideOfField.Remove(mover.panelCurrentlyOn);
+				List<PanelController> panelsToMoveTo = battlefield.GetPanelsOnSide(mover.onSideOf) as List<PanelController>;
+				panelsToMoveTo.Remove(mover.panelCurrentlyOn);
 				// ^ make sure to move to a different panel
-				PanelController randPanel = ownSideOfField[Random.Range(0, ownSideOfField.Count)];
 
-				if (randPanel.traversable)
+				if (panelsToMoveTo.Count > 0)
 				{
-					Vector3 newPos = randPanel.transform.position;
-					newPos.y = mover.transform.position.y;
-					mover.transform.position = newPos;
+					PanelController randPanel = panelsToMoveTo[Random.Range(0, panelsToMoveTo.Count)];
+
+					if (randPanel.traversable)
+					{
+						Vector3 newPos = randPanel.transform.position;
+						newPos.y = mover.transform.position.y;
+						mover.transform.position = newPos;
+					}
 				}
 
 				stepsTaken++;
@@ -49,7 +49,7 @@ public class ProtomanAI : EnemyAI
 			else 
 			{
 				
-				// teleport in widesword range of player
+				// Teleport in widesword range of player
 				PanelController frontOfNavi = battlefield.GetPanelRelativeTo(navi.panelCurrentlyOn, 
 																			Direction.right);
 				PanelController belowFrontOfNavi = battlefield.GetPanelRelativeTo(frontOfNavi, 
@@ -57,15 +57,17 @@ public class ProtomanAI : EnemyAI
 				PanelController aboveFrontOfNavi = battlefield.GetPanelRelativeTo(frontOfNavi,
 																				Direction.up);
 
+				// pick which panel to move to based on traversability
 				Vector3 newPos = mover.transform.position;
 
-				// pick which panel to move to based on traversability
 				if (frontOfNavi != null && frontOfNavi.traversable)
 					newPos = frontOfNavi.transform.position;
 				else if (belowFrontOfNavi != null && belowFrontOfNavi.traversable)
 					newPos = belowFrontOfNavi.transform.position;
 				else if (aboveFrontOfNavi != null && aboveFrontOfNavi.traversable)
 					newPos = aboveFrontOfNavi.transform.position;
+				else 
+					return; // For when there are no panels to move to
 
 				newPos.y = mover.transform.position.y;
 
@@ -74,8 +76,7 @@ public class ProtomanAI : EnemyAI
 				ResetMoveDelay();
 
 				mover.StartCoroutine(InvokePoisedToSlash());
-				
-
+			
 			}
 		}
 
@@ -83,7 +84,20 @@ public class ProtomanAI : EnemyAI
 		{
 			// Need poisedtoSlash to invoke on a two-frame delay;
 			// otherwise, the wrong panels will flash.
-			yield return new WaitForSeconds(Time.deltaTime * 2);
+
+			float timer = Time.deltaTime * 2;
+
+			while (true)
+			{
+				if (!mover.isPaused)
+					timer -= Time.deltaTime;
+
+				if (timer <= 0)
+					break;
+				
+				yield return null;
+			}
+
 			poisedToSlash.Invoke();
 		}
 	}
@@ -106,7 +120,7 @@ public class ProtomanAI : EnemyAI
 		}
 	}
 
-	protected override BattleMovementState movementStyle
+	protected override EnemyMovementState movementStyle
 	{
 		get { return _movementStyle; }
 		set { _movementStyle = value as ProtomanMovement; }
@@ -115,12 +129,10 @@ public class ProtomanAI : EnemyAI
 	public override void Init(EnemyController enemy)
 	{
 		base.Init(enemy);
-		movementStyle.Init(enemy);
-		enemy.movementHandler.ChangeState(movementStyle);
+		//enemy.movementHandler.ChangeState(movementStyle);
 
 		baseAttackDelay = movementStyle.baseMoveDelay / 2f;
 		attackDelay = baseAttackDelay;
-
 		
 		_movementStyle.poisedToSlash.AddListener(MakePanelsFlash);
 		_movementStyle.poisedToSlash.AddListener(Attack);
@@ -141,12 +153,12 @@ public class ProtomanAI : EnemyAI
 	IEnumerator AttackCoroutine()
 	{
 		// after a delay, launch the attack
-		float timer = gameController.frameRate * 0.35f;
+		float timer = 0.35f + (Time.deltaTime * 2);
 
 		while (true)
 		{
 			if (!enemy.isPaused)
-				timer--;
+				timer -= Time.deltaTime;
 			
 			if (timer <= 0)
 				break;
@@ -160,17 +172,20 @@ public class ProtomanAI : EnemyAI
 			navi.TakeDamage(damage);
 		}
 		
+		// For fun, crack the panels in widesword range, and break the ones that are already cracked.
 
-		PanelController panelToCrack = battlefield.GetPanelRelativeTo(enemy.panelCurrentlyOn, Direction.left);
-		if (panelToCrack != null)
+		foreach (PanelController panel in panelsInWideswordRange)
 		{
-			// check the panel type. If its normal, crack it. If its cracked, break it.
-			if (panelToCrack.panelName == "Cracked Panel")
-				panelToCrack.ChangeTo(PanelDatabase.instance.GetPanel("Broken Panel"));
-			
-			else if (panelToCrack.traversable)
-				panelToCrack.ChangeTo(PanelDatabase.instance.GetPanel("Cracked Panel"));
+			if (panel != null)
+			{
+				if (panel.panelName == "Cracked Panel" && !panel.isOccupied)
+					panel.ChangeTo(PanelDatabase.instance.GetPanel("Broken Panel"));
+				else if (panel.traversable)
+					panel.ChangeTo(PanelDatabase.instance.GetPanel("Cracked Panel"));
+			}
+
 		}
+	
 
 		ResetAttackDelay();
 

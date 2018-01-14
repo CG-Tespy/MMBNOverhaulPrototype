@@ -36,7 +36,7 @@ public abstract class LivingEntityController : ObservableMonoBehaviour, ILivingE
 	[SerializeField] LivingEntityInfo _entityInfo;
 	GameController gameController;
 	public BattleMovementModule movementHandler { get; protected set; }
-	protected Animator animator;
+	public Animator animator;
 
 	#endregion
 	#region Properties

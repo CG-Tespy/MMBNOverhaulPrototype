@@ -81,6 +81,7 @@
      <Compile Include="Assets\Scripts\NonMonoBehaviours\PanelEffects\PoisonPanelEffect.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Stat.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\States\BattleMovementState.cs" />
+     <Compile Include="Assets\Scripts\NonMonoBehaviours\States\EnemyMovementState.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\States\PanelState.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\States\PlayerBattleMovement.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\States\State.cs" />

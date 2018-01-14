@@ -23,10 +23,12 @@ public class PanelController : ObservableMonoBehaviour, IBattlefieldPanel, IPaus
 
 	GameController gameController;
 	IEnumerator flashCoroutine = null;
+
 	
 	#endregion 
 	
 	#region Properties
+	public bool isOccupied { get; protected set; }
 	public BoxCollider boxCollider { get; protected set; }
 
 	public bool isPaused { get; protected set; }
@@ -129,6 +131,11 @@ public class PanelController : ObservableMonoBehaviour, IBattlefieldPanel, IPaus
 	{
 		base.Update();
 
+		// Make sure to check if this panel is occupied at the start of the frame.
+		// Which should happen in Update if the frameRate is above 50
+		if (gameController.frameRate > 50)
+			CheckIfOccupied();
+
 		// Because of the update execution order, this needs to be in Update for the healthbar 
 		// to change color properly when an effect changes the player's HP. 
 		if (!isPaused)
@@ -141,6 +148,11 @@ public class PanelController : ObservableMonoBehaviour, IBattlefieldPanel, IPaus
 	protected override void FixedUpdate()
 	{
 		base.FixedUpdate();
+
+		// Make sure to check if this panel is occupied at the start of the frame.
+		// Which should happen in FixedUpdate if the frameRate is below 50
+		if (gameController.frameRate < 50)
+			CheckIfOccupied();
 
 		
 	}
@@ -253,6 +265,30 @@ public class PanelController : ObservableMonoBehaviour, IBattlefieldPanel, IPaus
 
 		centerRenderer.material.mainTexture = panelInfo.texture;
 			
+	}
+
+	void CheckIfOccupied()
+	{
+		Ray up = new Ray(transform.position, transform.up);
+
+		RaycastHit[] hits = Physics.RaycastAll(up, 10f);
+
+		LivingEntityController entityOnThisPanel;
+		RaycastHit currentHit;
+
+		for (int i = 0; i < hits.Length; i++)
+		{
+			currentHit = hits[i];
+			entityOnThisPanel = currentHit.transform.GetComponent<LivingEntityController>();
+
+			if (entityOnThisPanel != null)
+			{
+				isOccupied = true;
+				return;
+			}
+		}
+
+		isOccupied = false;
 	}
 
 	#endregion

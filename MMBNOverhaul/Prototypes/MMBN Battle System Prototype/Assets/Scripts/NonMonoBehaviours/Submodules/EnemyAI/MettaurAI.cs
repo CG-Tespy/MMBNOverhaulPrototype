@@ -8,18 +8,14 @@ using System.Linq;
 public class MettaurAI : EnemyAI
 {
 	#region Nested classes
-	public class MettaurMovement : BattleMovementState
+	public class MettaurMovement : EnemyMovementState
 	{
-		NaviBattleController navi;
-		GameController gameController;
 
 		public override void Init(LivingEntityController enemy)
 		{
 			base.Init(enemy);
 			baseMoveDelay = 1.5f;
 			moveDelay = baseMoveDelay;
-			gameController = GameController.instance;
-			navi = gameController.navi;
 			//battlefield = BattlefieldManager.instance;
 		}
 
@@ -34,12 +30,12 @@ public class MettaurAI : EnemyAI
 			// move up or down a panel depending on where the player is relative to tbis 
 			// mettaur
 
-			// get the panel this mettaur is standing on, as well as that the player is 
-			// standing on, before moving the mettaur up or down depending on whether 
-			// the player is.
+			// Get the panel this mettaur is standing on, as well as that the player is 
+			// standing on...
 			PanelController standingOn = mover.panelCurrentlyOn;
 			PanelController playerPanel = navi.panelCurrentlyOn;
 
+			// Decide how to move...
 			bool moveUp = playerPanel.posOnGrid.y > standingOn.posOnGrid.y;
 			bool moveDown = playerPanel.posOnGrid.y < standingOn.posOnGrid.y;
 
@@ -49,18 +45,22 @@ public class MettaurAI : EnemyAI
 				panelToMoveTo = battlefield.GetPanelRelativeTo(standingOn, Direction.up);
 			else if (moveDown)
 				panelToMoveTo = battlefield.GetPanelRelativeTo(standingOn, Direction.down);
-			else
+			
+			if (moveUp || moveDown)
 			{
-				// mettaurs are dumb.
 				ResetMoveDelay();
-				return;
+				Moved.Invoke();
 			}
+
+			// ... And move!
+			if (panelToMoveTo == null)
+				return;
 
 			Vector3 newPos = panelToMoveTo.transform.position;
 			newPos.y = mover.transform.position.y;
 			Debug.Log("Moving " + mover.name + " to panel at coords" + panelToMoveTo.posOnGrid);
 			mover.transform.position = newPos;
-			ResetMoveDelay();
+			
 		}
 
 
@@ -74,12 +74,13 @@ public class MettaurAI : EnemyAI
 	static int activeMettIndex = 0;
 	static bool mettsOrdered = false;
 
-	MettaurMovement _movementStyle = new MettaurMovement();
+	
 	protected float shockwaveDamage = 10;
 	protected float shockwaveSpeed = 1f;
 
 	GameObject shockWaveObject = null;
-	protected override BattleMovementState movementStyle
+	MettaurMovement _movementStyle = new MettaurMovement();
+	protected override EnemyMovementState movementStyle
 	{
 		get { return _movementStyle; }
 		set { _movementStyle = value as MettaurMovement; }
@@ -93,13 +94,11 @@ public class MettaurAI : EnemyAI
 		canAttack = false;
 		// ^make the first mettaur wait before attacking
 
-		baseAttackDelay = 5f;
+		baseAttackDelay = 2.5f;
 		attackDelay = baseAttackDelay;
 
-		movementStyle.Init(mett);
-		enemy.movementHandler.ChangeState(movementStyle);
-
 		mett.mBEvents.Destroy.AddListener(OnDestroy);
+		movementStyle.Moved.AddListener(ResetAttackDelay);
 	}
 
 	public override void Execute()

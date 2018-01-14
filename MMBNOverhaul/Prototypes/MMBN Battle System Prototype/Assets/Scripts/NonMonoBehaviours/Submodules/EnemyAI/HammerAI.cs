@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class HammerAI : EnemyAI
 {
-	public class HammerMovement : BattleMovementState
+	public class HammerMovement : EnemyMovementState
 	{
 		/*
 		Waits until the player is within the hammer's line of sight (the entire row it is on), 
@@ -17,9 +17,6 @@ public class HammerAI : EnemyAI
 		Vector3 basePosition;
 		public bool atBasePosition = true;
 
-        protected GameController gameController;
-        protected NaviBattleController navi;
-
 		public UnityEvent ReadyToSlash { get; protected set; }
 
 		public override void Init(LivingEntityController controller)
@@ -29,8 +26,6 @@ public class HammerAI : EnemyAI
 			 */
 
 			base.Init(controller);
-            gameController = GameController.instance;
-            navi = gameController.navi;
 
 			baseMoveDelay = 2f;
 			moveDelay = 0.1f; // let the hammer attack immediately
@@ -87,9 +82,9 @@ public class HammerAI : EnemyAI
 	}
 
 	HammerMovement _movementStyle = new HammerMovement();
-	protected override BattleMovementState movementStyle 
+	protected override EnemyMovementState movementStyle 
 	{
-		get { return _movementStyle as BattleMovementState; }
+		get { return _movementStyle; }
 		set { _movementStyle = value as HammerMovement; }
 	}
 
@@ -100,11 +95,9 @@ public class HammerAI : EnemyAI
 	{
 		base.Init(enemy);
 
-        movementStyle.Init(enemy);
 		baseAttackDelay = movementStyle.baseMoveDelay / 2.5f;
 		attackDelay = baseAttackDelay;
 
-		enemy.movementHandler.ChangeState(movementStyle);
 		canAttack = false;
 
 		_movementStyle.ReadyToSlash.AddListener(MakePanelFlash);
@@ -122,18 +115,21 @@ public class HammerAI : EnemyAI
 
 	protected override void Attack()
 	{
-		enemy.StartCoroutine(AttackCoroutine());
+		enemy.StartCoroutine(this.AttackCoroutine());
 	}
 
 	IEnumerator AttackCoroutine()
 	{
 		// the attack has to happen after a delay
-		float timer = gameController.frameRate * (0.35f + (Time.deltaTime * 2));
+		float timer = 0.5f;
 
 		while (true)
 		{
 			if (!enemy.isPaused)
+			{
 				timer -= Time.deltaTime;
+				Debug.Log(enemy.name + " timer is: " + timer);
+			}
 
 			if (timer <= 0)
 				break;
@@ -155,7 +151,18 @@ public class HammerAI : EnemyAI
 	IEnumerator PanelFlashCoroutine()
 	{
 		// the panel must flash after a two-frame delay, otherwise the wrong panel will flash
-		yield return new WaitForSeconds(Time.deltaTime * 2);
+		float timer = Time.deltaTime * 2;
+
+		while (true)
+		{
+			if (!enemy.isPaused)
+				timer -= Time.deltaTime;
+
+			if (timer <= 0)
+				break;
+
+			yield return null;
+		}
 
 		string matPath = "Materials/Yellow";
 		Material yellow = Resources.Load<Material>(matPath);
@@ -175,7 +182,10 @@ public class HammerAI : EnemyAI
 		PanelController playerPanel = navi.panelCurrentlyOn;
 		PanelController currentPanel = enemy.panelCurrentlyOn;
 
-		return (playerPanel.posOnGrid.x == currentPanel.posOnGrid.x - 1);
+		bool sameColumn = playerPanel.posOnGrid.y == currentPanel.posOnGrid.y;
+		bool playerJustToLeft = playerPanel.posOnGrid.x == currentPanel.posOnGrid.x - 1;
+
+		return (sameColumn && playerJustToLeft);
 		
 	}
 
