@@ -143,6 +143,15 @@ public class HammerAI : EnemyAI
 			navi.TakeDamage(damage);
 			
 		}
+		else 
+		{
+			// crack the panel
+			PanelController panelToLeft = battlefield.GetPanelRelativeTo(enemy.panelCurrentlyOn, Direction.left);
+			if (panelToLeft != null)
+			{
+				panelToLeft.ChangeTo(PanelDatabase.instance.GetPanel("Cracked Panel"));
+			}
+		}
 
 		ResetAttackDelay();
 
