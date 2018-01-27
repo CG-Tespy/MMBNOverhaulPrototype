@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using System.Linq;
 
 public class MettaurAI : EnemyAI
@@ -73,7 +74,6 @@ public class MettaurAI : EnemyAI
 	static EnemyController activeMett = null;
 	static int activeMettIndex = 0;
 	static bool mettsOrdered = false;
-
 	
 	protected float shockwaveDamage = 10;
 	protected float shockwaveSpeed = 1f;
@@ -88,6 +88,7 @@ public class MettaurAI : EnemyAI
 
 	public override void Init(EnemyController mett)
 	{
+		//Debug.Log("Calling mettaur init!");
 		base.Init(mett);
 		mettsInField.Add(mett);
 
@@ -98,6 +99,7 @@ public class MettaurAI : EnemyAI
 		attackDelay = baseAttackDelay;
 
 		mett.mBEvents.Destroy.AddListener(OnDestroy);
+		mett.mBEvents.Disable.AddListener(OnDisable);
 		movementStyle.Moved.AddListener(ResetAttackDelay);
 	}
 
@@ -147,6 +149,7 @@ public class MettaurAI : EnemyAI
 
 	void OrderMetts()
 	{
+		Debug.Log("Ordering metts!");
 		// Makes it so that only one of the metts acts at a time, just like in the original BN 
 		// games.
 
@@ -171,6 +174,16 @@ public class MettaurAI : EnemyAI
 			activeMett = mettsInField[activeMettIndex];
 			activeMett.Unpause();
 		}
+
+		// For when this is the last mett destroyed. Avoids a glitch where the
+		// mettaur ai isn't executed when loading a mett battle scene for the second time
+		if (mettsInField.Count == 0)
+			mettsOrdered = false;
+	}
+
+	void OnDisable()
+	{
+		OnDestroy();
 	}
 
 	void PassToNextMett()

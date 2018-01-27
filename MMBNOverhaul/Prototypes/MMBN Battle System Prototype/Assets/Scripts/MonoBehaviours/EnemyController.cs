@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class EnemyController : LivingEntityController
 {
@@ -54,20 +55,26 @@ public class EnemyController : LivingEntityController
 		PositionSelfOnPanel();
 		SetupEnemyInfo();
 		SetupAI();
+
+		//Debug.Log(enemyInfo.name + " Start() function called!");
 	}
 
 	protected override void Update()
 	{
+		//Debug.Log(enemyInfo.name + " Update() function called!");
 		base.Update();
 
 		if (!isPaused)
 		{
+			Debug.Log(enemyInfo.name + " is not paused!");
 			if (ai != null)
 				ai.Execute();
 
 			movementHandler.Execute();
 			CheckDeath();
 		}
+		else 
+			Debug.Log(enemyInfo.name + " is paused!");
 	}
 
 	void CheckDeath()

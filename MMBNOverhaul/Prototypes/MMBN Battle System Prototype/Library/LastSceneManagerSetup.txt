@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Resources/Scenes/TwoHammerBattle.unity
+- path: Assets/Resources/Scenes/ThreeMettaurBattle.unity
   isLoaded: 1
   isActive: 1

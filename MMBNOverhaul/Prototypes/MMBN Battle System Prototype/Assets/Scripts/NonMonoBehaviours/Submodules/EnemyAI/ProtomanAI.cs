@@ -193,11 +193,17 @@ public class ProtomanAI : EnemyAI
 
 	void MakePanelsFlash()
 	{
-		// make the panels in widesword range flash
+		// make the panelsin widesword range flash
 		string matPath = "Materials/Yellow";
 		Material yellow = Resources.Load<Material>(matPath);
 
-		foreach (PanelController panel in panelsInWideswordRange)
+		// Not using the panelsInWideswordRange property; helps avoid a certain glitch
+		PanelController[] panels = new PanelController[3];
+		panels[1] = navi.panelCurrentlyOn;
+		panels[0] = battlefield.GetPanelRelativeTo(panels[1], Direction.up);
+		panels[2] = battlefield.GetPanelRelativeTo(panels[1], Direction.down);
+
+		foreach (PanelController panel in panels)
 			if (panel != null)
 				panel.FlashMaterial(yellow, 0.25f, 0.05f);
 		

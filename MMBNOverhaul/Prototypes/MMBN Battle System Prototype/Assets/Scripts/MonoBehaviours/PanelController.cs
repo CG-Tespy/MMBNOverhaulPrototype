@@ -55,7 +55,8 @@ public class PanelController : ObservableMonoBehaviour, IBattlefieldPanel, IPaus
 		{ 
 			//panelInfo.material = value; 
 			//renderer.material = value; 
-			centerRenderer.material = value;
+			if (centerRenderer != null)
+				centerRenderer.material = value;
 		}
 	}
 

@@ -177,8 +177,7 @@ public class HammerAI : EnemyAI
 		Material yellow = Resources.Load<Material>(matPath);
 
 		// make the panel to the left of this one flash
-		PanelController panel = battlefield.GetPanelRelativeTo( enemy.panelCurrentlyOn, 
-																Direction.left);
+		PanelController panel = navi.panelCurrentlyOn;
 
 		if (panel != null)
 			panel.FlashMaterial(yellow, 0.25f, 0.05f);

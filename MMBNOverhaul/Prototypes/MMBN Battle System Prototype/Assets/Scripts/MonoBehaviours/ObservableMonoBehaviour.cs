@@ -19,6 +19,7 @@ public class MonoBehaviourEvents
 	// TODO: Add the other events all MonoBehaviours have
 
 	public UnityEvent Destroy { get; protected set; }
+	public UnityEvent Disable { get; protected set; }
 
 
 	public MonoBehaviourEvents()
@@ -32,6 +33,8 @@ public class MonoBehaviourEvents
 		OnCollisionExit = 		new CollisionEvent();
 
 		Destroy = 				new UnityEvent();
+
+		Disable = 				new UnityEvent();
 	}
 }
 
@@ -104,6 +107,11 @@ public abstract class ObservableMonoBehaviour : MonoBehaviour
 	protected virtual void OnDestroy()
 	{
 		mBEvents.Destroy.Invoke();
+	}
+
+	protected virtual void OnDisable()
+	{
+		mBEvents.Disable.Invoke();
 	}
 	
 }

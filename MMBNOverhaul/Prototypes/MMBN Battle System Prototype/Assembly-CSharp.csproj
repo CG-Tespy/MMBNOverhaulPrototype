@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\MonoBehaviours\Effect Containers\BrokenPanel.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\Effect Containers\CrackedPanel.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\Effect Containers\PoisonPanel.cs" />
+     <Compile Include="Assets\Scripts\MonoBehaviours\EndOfBattleHandler.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\EnemyController.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\HealthbarController.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\LivingEntityController.cs" />
@@ -68,6 +69,7 @@
      <Compile Include="Assets\Scripts\MonoBehaviours\ObservableMonoBehaviour.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\PanelController.cs" />
      <Compile Include="Assets\Scripts\MonoBehaviours\PanelEffectContainer.cs" />
+     <Compile Include="Assets\Scripts\MonoBehaviours\SceneLoader.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Combatant.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\DamageType.cs" />
      <Compile Include="Assets\Scripts\NonMonoBehaviours\Direction.cs" />

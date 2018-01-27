@@ -143,6 +143,8 @@ public abstract class LivingEntityController : ObservableMonoBehaviour, ILivingE
 		movementHandler = new BattleMovementModule();
 		movementHandler.Init(this);
 		panelCurrentlyOn = GetPanelCurrentlyOn();
+
+		Died.AddListener( () => gameObject.SetActive(false) );
 	}
 
 	#endregion
@@ -171,6 +173,9 @@ public abstract class LivingEntityController : ObservableMonoBehaviour, ILivingE
 		// don't grant invincibility for panel damage
         if (tookDamage && type == DamageType.poisonPanel)
 			isInvincible = false;
+
+		if (tookDamage && health <= 0)
+			Died.Invoke();
 
 		return tookDamage;
 		
